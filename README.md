@@ -41,7 +41,7 @@ Pexels states that its photos and videos may be used for free for personal and c
 - With **Select Lens** still selected, the scene illustrates the selected eye-condition preset (a simplified pre-IOL view).
 - Selecting an IOL switches the view to a simplified post-IOL concept. The cataract haze is removed because cataract surgery replaces the cloudy natural lens.
 - The combined astigmatism presets retain mild directional ghosting in this demo. The listed lens selections are not explicitly toric variants; real astigmatism correction depends on the measured cylinder, surgical plan, and an appropriate toric option where indicated.
-- Presbyopia mainly softens the Reading scene. A distance-targeted monofocal keeps near work soft; RayOne EMV extends distance toward intermediate; trifocal offers distance/intermediate/near focal points; RayOne Galaxy is designed for a continuous range.
+- Presbyopia blur is restricted to the Reading scene; Night Driving, Day Driving and Outdoor remain clear of presbyopia blur. Once a lens is selected, the Reading scene changes by lens: distance-targeted monofocal remains soft at near, RayOne EMV is shown with partial near softness, and trifocal/Galaxy show a clearer near preview. These are conceptual examples, not patient-specific acuity predictions.
 - Night-driving halo overlays are conceptual illustrations of possible photic effects, not expected or guaranteed patient outcomes.
 
 
