@@ -40,12 +40,12 @@ Pexels states that its photos and videos may be used for free for personal and c
 - With **Select Lens** still selected, the scene illustrates the selected eye-condition preset (a simplified pre-IOL view).
 - Selecting an IOL switches the view to a simplified post-IOL concept. The cataract haze is removed because cataract surgery replaces the cloudy natural lens.
 - The combined astigmatism presets retain mild directional ghosting in this demo. The listed lens selections are not explicitly toric variants; real astigmatism correction depends on the measured cylinder, surgical plan, and an appropriate toric option where indicated.
-- Presbyopia blur is restricted to the Reading scene; Night Driving and Outdoor remain clear of presbyopia blur. Once a lens is selected, the Reading scene changes by lens: distance-targeted monofocal remains soft at near, RayOne EMV is shown with partial near softness, and trifocal/Galaxy show a clearer near preview. These are conceptual examples, not patient-specific acuity predictions.
+- Presbyopia blur is restricted to the Reading scene; Night Driving and Outdoor remain clear of presbyopia blur. Once a lens is selected, the Reading scene changes by lens: distance-targeted monofocal remains soft at near, RayOne EMV is shown with partial near softness, and trifocal/Galaxy show a clearer near preview. RayOne Galaxy is described as a full-range-of-focus IOL designed for distance, intermediate and near vision, with the aim of reducing glasses dependence; individual outcomes vary. These are conceptual examples, not patient-specific acuity predictions.
 - Night-driving halo overlays are conceptual illustrations of possible photic effects, not expected or guaranteed patient outcomes.
 
 
 - **Monofocal vs RayOne EMV in driving scenes:** both retain distance detail; the standard monofocal preset softens the nearer dashboard/intermediate region more, while RayOne EMV retains more intermediate detail to illustrate its increased range of focus.
-- **Reading scene:** the distance-targeted monofocal preset is softened most; RayOne EMV is shown as an intermediate/near transition; trifocal and Galaxy presets are clearer at the near task.
+- **Reading scene:** the distance-targeted monofocal preset is softened most; RayOne EMV is shown as an intermediate/near transition; trifocal and Galaxy presets are clearer at the near task. RayOne Galaxy is designed to provide a continuous full range of focus—distance, intermediate and near—with the aim of reducing dependence on glasses for everyday activities; this is not a guarantee of spectacle independence.
 - **Night effects:** the trifocal preset uses a more visible halo illustration; Galaxy's glow is milder, in line with Rayner's description of minimized dysphotopsia. These are teaching overlays, not patient-specific optical predictions.
 
 ## Educational sources
