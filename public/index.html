@@ -27,8 +27,11 @@ body{padding:0 16px 18px}
 .switch input:checked+.switch-track{background:#547b8c}
 .switch input:checked+.switch-track:before{transform:translateX(42px);background:#f0f6f8}
 .switch input:focus-visible+.switch-track{outline:2px solid #b6d8e7;outline-offset:3px}
-.views{display:grid;grid-template-columns:1fr;gap:9px}
-.views.comparing{grid-template-columns:1fr 1fr}
+.views{display:grid;grid-template-columns:minmax(0,1fr);gap:9px;width:100%;min-width:0}
+.views.comparing{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+.views:not(.comparing) #viewB{display:none!important}
+.views.comparing #viewB{display:block!important}
+.views.comparing .view{width:100%;min-width:0;max-width:100%}
 .view{min-width:0;position:relative;overflow:hidden;border-radius:5px;background:#1c2b35;aspect-ratio:16/7.2;min-height:390px;max-height:calc(100vh - 122px)}
 .scene-art,.ghost-art{position:absolute;inset:0;width:100%;height:100%;display:block;transition:filter .24s ease,opacity .24s ease;transform:scale(1.005)}
 .ghost-art{display:none;opacity:.2;mix-blend-mode:screen;transform:translate(4px,-2px) scale(1.005);pointer-events:none}
@@ -108,8 +111,8 @@ body{padding:0 16px 18px}
   </div>
 </section>
 <section class="views" id="views" aria-live="polite">
-  <article class="view condition-cataracts" id="viewA"><div class="scene-art" id="sceneA"></div><div class="ghost-art" id="ghostA"></div><div class="optical-overlay"></div><div class="focus-overlay"></div><div class="view-title"><span id="conditionNameA">Cataracts</span><button class="info" type="button" aria-label="About this condition" aria-expanded="false" data-tip="tipA">i</button></div><div class="tooltip" id="tipA" hidden>Cataract-like haze is shown as a simplified reduction in clarity and contrast. The effect is illustrative, not a clinical model.</div><div class="view-mark" id="markA">ILLUSTRATIVE VIEW</div></article>
-  <article class="view condition-cataracts hidden" id="viewB"><div class="scene-art" id="sceneB"></div><div class="ghost-art" id="ghostB"></div><div class="optical-overlay"></div><div class="focus-overlay"></div><div class="view-title"><span id="conditionNameB">Cataracts</span><button class="info" type="button" aria-label="About this condition" aria-expanded="false" data-tip="tipB">i</button></div><div class="tooltip" id="tipB" hidden>Cataract-like haze is shown as a simplified reduction in clarity and contrast. The effect is illustrative, not a clinical model.</div><div class="view-mark" id="markB">COMPARISON VIEW</div></article>
+  <article class="view condition-cataracts" id="viewA"><div class="scene-art" id="sceneA"></div><div class="ghost-art" id="ghostA"></div><div class="optical-overlay"></div><div class="focus-overlay"></div><div class="view-title"><span id="conditionNameA">Cataracts</span><button class="info" type="button" aria-label="About this condition" aria-expanded="false" data-tip="tipA">i</button></div><div class="tooltip" id="tipA" hidden>Cataract-like haze is shown as a simplified reduction in clarity and contrast. The effect is illustrative, not a clinical model.</div></article>
+  <article class="view condition-cataracts hidden" id="viewB"><div class="scene-art" id="sceneB"></div><div class="ghost-art" id="ghostB"></div><div class="optical-overlay"></div><div class="focus-overlay"></div><div class="view-title"><span id="conditionNameB">Cataracts</span><button class="info" type="button" aria-label="About this condition" aria-expanded="false" data-tip="tipB">i</button></div><div class="tooltip" id="tipB" hidden>Cataract-like haze is shown as a simplified reduction in clarity and contrast. The effect is illustrative, not a clinical model.</div></article>
 </section>
 <p style="margin:10px 3px 0;color:#8d9aa5;font-size:10px;line-height:1.45">Educational demonstration only. Visual effects are simplified approximations and do not predict an individual’s vision or surgical outcome. Lens choice should be discussed with a qualified eye-care professional.</p><p class="asset-credit">Video credits: Night Driving — “POV night drive in city, vibrant nightlife through car windshield” by Orhan Pergel, Pexels; Day Driving — “Driving at Daytime” by I Am Sorin, Pexels, slowed to 65% playback; Reading — “Close-Up Video Of Person Reading A Book” by Olia Danilevich, Pexels; Outdoor — “Vibrant Nightlife in Bustling Asian Street Market” by Media Dung, Pexels. Clips stream from Pexels and are used under its free-use license. <a href="https://www.pexels.com/video/a-car-driving-through-a-city-at-night-19830439/" target="_blank" rel="noopener" style="color:#a9c9d6">Night source</a> · <a href="https://www.pexels.com/video/driving-at-daytime-9109808/" target="_blank" rel="noopener" style="color:#a9c9d6">Day source</a> · <a href="https://www.pexels.com/video/close-up-video-of-person-reading-a-book-4625318/" target="_blank" rel="noopener" style="color:#a9c9d6">Reading source</a> · <a href="https://www.pexels.com/video/vibrant-nightlife-in-bustling-asian-street-market-29192124/" target="_blank" rel="noopener" style="color:#a9c9d6">Outdoor source</a> · <a href="https://www.pexels.com/license/" target="_blank" rel="noopener" style="color:#a9c9d6">Pexels license</a>.</p>
 </main>
@@ -208,12 +211,11 @@ function draw(target,condition,lens){
   };
   $("conditionName"+target).textContent=hasLens?lensTitles[lens]:names[condition];
   $("tip"+target).textContent=hasLens?lensInfo[lens]:conditionInfo[condition];
-  const label=hasLens?lensProfiles[lens].name+" · POST-IOL ILLUSTRATION":"CONDITION VIEW · SELECT AN IOL";
-  $("mark"+target).textContent=target==="B"?(hasLens?label:"SELECT COMPARISON IOL"):label;
+
 }
 function update(){
   const condition=$("condition").value,lensA=$("lensA").value,lensB=$("lensB").value,compare=$("compare").checked;
-  $("lensB").disabled=!compare;$("views").classList.toggle("comparing",compare);$("viewB").classList.toggle("hidden",!compare);
+  $("lensB").disabled=!compare;$("views").classList.toggle("comparing",compare);$("viewB").hidden=!compare;
   $("profileB").classList.toggle("hidden",!compare||!lensB);
   draw("A",condition,lensA);if(compare)draw("B",condition,lensB);
   setProfile("A",lensA);setProfile("B",compare?lensB:null);
