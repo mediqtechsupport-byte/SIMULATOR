@@ -24,6 +24,18 @@ To enable automatic deployments:
 The Wrangler configuration's `name` must match the existing Worker name `simulator`.
 
 
+
+## Scene video sources and licenses
+
+The scene selector uses matching short clips for each environment. Clips are streamed from their original hosts, not copied into this repository.
+
+- **Night Driving:** “Cars Passing by at Night” by Maximilian Schönherr, Wikimedia Commons, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). [Source](https://commons.wikimedia.org/wiki/File:Cars_Passing_by_at_Night.webm)
+- **Day Driving:** “ROAD VIEW” by Niyati Sharma 1505, Wikimedia Commons, 9.4 seconds, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). [Source](https://commons.wikimedia.org/wiki/File:ROAD_VIEW.webm)
+- **Reading:** “Person Reading a Book” by Anvar Tushakov, 16-second Pexels clip, used under the [Pexels free-use license](https://www.pexels.com/license/). [Source](https://www.pexels.com/video/person-reading-a-book-4750067/)
+- **Outdoor:** “Mountain Landscape near Nathu La Pass, Sikkim” by Rajani Gairshail, 9.6 seconds, Wikimedia Commons, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). [Source](https://commons.wikimedia.org/wiki/File:Mountain_Landscape_near_Nathu_La_Pass,_Sikkim.webm)
+
+The page displays attribution links for the clips. The Pexels license permits use on websites and apps, does not require attribution, and prohibits redistributing the stock file as a standalone stock asset.
+
 ## How the condition and IOL selectors interact
 
 - With **Select Lens** still selected, the scene illustrates the selected eye-condition preset (a simplified pre-IOL view).
