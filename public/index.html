@@ -102,6 +102,105 @@ body{padding:0 16px 18px}
 @media(max-width:1050px){.controls{gap:17px;grid-template-columns:1fr 1.35fr 1.15fr .4fr 1.15fr}.control label,.compare-label{font-size:14px}.control select{font-size:16px}.view-title{font-size:17px;top:18px;left:20px}}
 @media(max-width:720px){body{padding:0 10px 14px}.controls{grid-template-columns:1fr 1fr;gap:17px 14px;padding:14px 4px 18px}.compare-control{grid-column:1}.control:last-child{grid-column:2;grid-row:3}.control select{font-size:15px}.compare-label{font-size:13px}.switch{width:72px;height:36px}.switch-track:before{width:28px;height:28px;top:4px;left:4px}.switch input:checked+.switch-track:before{transform:translateX(36px)}.views.comparing{grid-template-columns:1fr}.view{min-height:260px;max-height:none;aspect-ratio:16/9}.view-title{top:14px;left:15px;font-size:16px}.info{width:22px;height:22px;font-size:13px}.tooltip{top:45px;left:15px}.view-mark{right:10px;bottom:10px}}
 @media(max-width:420px){.controls{grid-template-columns:1fr 1fr;gap:13px 10px}.control label{font-size:12px}.control select{font-size:13px}.compare-label{font-size:12px}.switch{width:64px;height:33px}.switch-track:before{width:25px;height:25px;top:4px;left:4px}.switch input:checked+.switch-track:before{transform:translateX(31px)}.view{min-height:220px}}
+
+/* =========================================
+   HIGH-VISIBILITY CONDITION & LENS DIFFERENCES
+   These overlays are teaching illustrations,
+   not measured patient-specific optical results.
+   ========================================= */
+
+/* ASTIGMATISM: a clearly offset, directional ghost image. */
+.view.state-astig .ghost-art{
+  display:block!important;
+  opacity:.78!important;
+  transform:translate(14px,4px) scale(1.018)!important;
+  filter:blur(1px) saturate(1.7) hue-rotate(17deg) brightness(1.18)!important;
+  mix-blend-mode:screen!important;
+}
+.view.pre-iol.state-astig .ghost-art{opacity:.82!important}
+.view.post-iol.state-astig .ghost-art{opacity:.70!important}
+.view.state-astig.scene-night .optical-overlay{
+  opacity:.9!important;
+  background:
+    linear-gradient(0deg,transparent 31%,rgba(218,240,255,.12) 32%,transparent 34%),
+    linear-gradient(0deg,transparent 48%,rgba(255,244,204,.24) 49%,rgba(255,244,204,.24) 50%,transparent 52%),
+    linear-gradient(0deg,transparent 67%,rgba(218,240,255,.12) 68%,transparent 70%),
+    radial-gradient(ellipse 20% 5% at 38% 38%,rgba(255,239,181,.56),transparent 76%),
+    radial-gradient(ellipse 20% 5% at 63% 38%,rgba(255,239,181,.52),transparent 76%);
+  mix-blend-mode:screen;
+}
+
+/* PRESBYOPIA: blur only the foreground reading material. */
+.view.state-presbyopia.scene-reading .scene-art{filter:none!important}
+.view.state-presbyopia.scene-reading .focus-overlay{
+  inset:43% 0 0!important;
+}
+.view.pre-iol.state-presbyopia.scene-reading .focus-overlay,
+.view.pre-iol.state-presbyopia-astig.scene-reading .focus-overlay{
+  opacity:1!important;
+  backdrop-filter:blur(8px) saturate(.72)!important;
+  -webkit-backdrop-filter:blur(8px) saturate(.72)!important;
+  background:rgba(238,231,213,.18)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-monofocal .focus-overlay{
+  opacity:1!important;
+  backdrop-filter:blur(8px) saturate(.72)!important;
+  -webkit-backdrop-filter:blur(8px) saturate(.72)!important;
+  background:rgba(238,231,213,.18)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-rayone-emv .focus-overlay{
+  opacity:1!important;
+  backdrop-filter:blur(4.5px) saturate(.86)!important;
+  -webkit-backdrop-filter:blur(4.5px) saturate(.86)!important;
+  background:rgba(238,231,213,.09)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-trifocal .focus-overlay{
+  opacity:.06!important;
+  backdrop-filter:blur(.5px)!important;
+  -webkit-backdrop-filter:blur(.5px)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-rayone-galaxy .focus-overlay{
+  opacity:0!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Trifocal: more pronounced concentric halos around night point lights. */
+.view.post-iol.scene-night.lens-trifocal .optical-overlay{
+  opacity:.96!important;
+  background:
+    radial-gradient(circle at 38% 37%,rgba(255,247,207,.62) 0 1.1%,transparent 2.2%),
+    repeating-radial-gradient(circle at 38% 37%,transparent 0 14px,rgba(255,235,169,.34) 16px 19px,transparent 22px 31px),
+    radial-gradient(circle at 63% 37%,rgba(255,247,207,.58) 0 1.1%,transparent 2.2%),
+    repeating-radial-gradient(circle at 63% 37%,transparent 0 14px,rgba(255,235,169,.30) 16px 19px,transparent 22px 31px),
+    radial-gradient(ellipse 25% 16% at 50% 40%,rgba(255,236,183,.14),transparent 78%);
+  mix-blend-mode:screen;
+}
+
+/* Galaxy: a smoother, softer glow without the pronounced concentric rings. */
+.view.post-iol.scene-night.lens-rayone-galaxy .optical-overlay{
+  opacity:.52!important;
+  background:
+    radial-gradient(ellipse 12% 17% at 38% 37%,rgba(255,245,205,.34),transparent 76%),
+    radial-gradient(ellipse 13% 18% at 63% 37%,rgba(255,245,205,.32),transparent 76%),
+    radial-gradient(ellipse 27% 20% at 50% 40%,rgba(255,239,193,.07),transparent 80%);
+  mix-blend-mode:screen;
+}
+
+/* A tiny text-edge fringe differentiates a diffractive trifocal near preview
+   from the smooth continuous-focus Galaxy near preview. */
+.view.post-iol.scene-reading.lens-trifocal .ghost-art{
+  display:block!important;
+  opacity:.22!important;
+  transform:translate(2px,1px) scale(1.006)!important;
+  filter:blur(.65px) saturate(1.3)!important;
+  mix-blend-mode:screen!important;
+}
+.view.post-iol.scene-reading.lens-rayone-galaxy .ghost-art{
+  display:none!important;
+  opacity:0!important;
+}
+
 </style>
 </head>
 <body>
@@ -176,7 +275,7 @@ function setProfile(target,key){
 }
 function draw(target,condition,lens){
   const scene=$("scene").value,view=$("view"+target),hasLens=Boolean(lens),hasCataract=cataractKey(condition),hasAstig=astigmatismKey(condition),hasPresbyopia=presbyopiaKey(condition);
-  $("scene"+target).innerHTML=sceneMedia(scene);$("ghost"+target).innerHTML=hasAstig?sceneMedia(scene):"";
+  $("scene"+target).innerHTML=sceneMedia(scene);$("ghost"+target).innerHTML=(hasAstig||(scene==="reading"&&lens==="trifocal"))?sceneMedia(scene):"";
   const classes=["view","scene-"+scene,hasLens?"post-iol":"pre-iol",hasCataract?"state-cataracts":"",hasAstig?"state-astig":"",hasPresbyopia?"state-presbyopia":""];
   ["scene"+target,"ghost"+target].forEach(id=>{
     const root=$(id),media=root.querySelector("video");
@@ -212,8 +311,8 @@ function draw(target,condition,lens){
   const lensInfo={
     monofocal:"A standard monofocal IOL is set for one main focal distance. This demonstration assumes a distance target: road signs and distant cars stay clearer, while nearer dashboard detail is softened.",
     "rayone-emv":"RayOne EMV is an enhanced, non-diffractive monofocal design that extends focus from distance toward intermediate. The demonstration keeps distant details clear and shows more dashboard/intermediate detail than the standard monofocal view. Actual results vary.",
-    trifocal:"A trifocal IOL distributes light across distance, intermediate and near focal points. This conceptual night scene may show more halo or glare than non-diffractive designs; actual symptoms vary.",
-    "rayone-galaxy":"RayOne Galaxy is a full-range-of-focus IOL. Its non-diffractive spiral optic is designed to provide high-quality vision at distance, intermediate and near, with the aim of helping people become less dependent on glasses for everyday activities. It is designed to provide a continuous range of focus; it cannot guarantee that every person will be glasses-free. This scene is an educational illustration, not a clinical prediction."
+    trifocal:"A trifocal IOL provides separate distance, intermediate and near focal points. In this educational preview, night lights have more pronounced concentric halo rings and the reading scene has a slight text-edge fringe. These are illustrative effects, not a prediction of symptoms for an individual.",
+    "rayone-galaxy":"RayOne Galaxy is a full-range-of-focus IOL. Its non-diffractive spiral optic is designed to provide high-quality vision at distance, intermediate and near, with the aim of helping people become less dependent on glasses for everyday activities. In this educational preview, its near text stays clean and its night-light glow is smoother and less ring-like than the trifocal illustration. It cannot guarantee that every person will be glasses-free; individual outcomes vary."
   };
   $("conditionName"+target).textContent=hasLens?lensTitles[lens]:names[condition];
   $("tip"+target).textContent=hasLens?lensInfo[lens]:conditionInfo[condition];
