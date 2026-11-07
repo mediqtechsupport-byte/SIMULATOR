@@ -31,7 +31,7 @@ The scene selector streams video from Pexels. The same source footage is used in
 
 - **Night Driving:** “POV night drive in city, vibrant nightlife through car windshield” by Orhan Pergel. [Pexels clip](https://www.pexels.com/video/a-car-driving-through-a-city-at-night-19830439/)
 - **Day Driving:** “Driving at Daytime” by I Am Sorin. [Pexels clip](https://www.pexels.com/video/driving-at-daytime-9109808/). Playback is slowed to 65% for a calmer scene.
-- **Reading:** “Close-Up Video Of Person Reading A Book” by Olia Danilevich. [Pexels clip](https://www.pexels.com/video/close-up-video-of-person-reading-a-book-4625318/)
+- **Reading:** “Pages of an Open Book” by Tima Miroshnichenko, Pexels free-use license. The clip is a macro view of open book pages with printed text in focus. [Source](https://www.pexels.com/video/pages-of-an-open-book-7034147/). Fallback: “Close Up Video of an Open Book” by SHVETS production. [Source](https://www.pexels.com/video/close-up-video-of-an-open-book-7034161/).
 - **Outdoor:** “Vibrant Nightlife in Bustling Asian Street Market” by Media Dung. The listed clip is 35 seconds, 4K (3840 × 2160), 16:9 and 25 fps. [Pexels clip](https://www.pexels.com/video/vibrant-nightlife-in-bustling-asian-street-market-29192124/)
 
 Pexels states that its photos and videos may be used for free for personal and commercial purposes under the [Pexels license](https://www.pexels.com/license/), subject to its terms and restrictions. Creator credits and source links are shown on the simulator page as a courtesy. The clips are streamed from Pexels rather than redistributed as standalone stock files.
