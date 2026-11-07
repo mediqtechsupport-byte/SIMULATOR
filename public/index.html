@@ -161,7 +161,7 @@ const lensProfiles={
 monofocal:{name:"Monofocal",focus:["DISTANCE"],description:"One focal distance. This demo assumes a distance-targeted lens, so reading may remain soft; near glasses are commonly needed.",near:"blur"},
 "rayone-emv":{name:"RayOne EMV",focus:["DISTANCE","INTERMEDIATE"],description:"Enhanced, non-diffractive monofocal design that extends focus from distance toward intermediate (Rayner reports up to 1.5 D). Near reading may still need extra correction.",near:"soft"},
 trifocal:{name:"Trifocal",focus:["DISTANCE","INTERMEDIATE","NEAR"],description:"A diffractive design distributes light across distance, intermediate and near focal points. The night preview illustrates possible halos or glare; real symptoms vary.",near:"clear"},
-"rayone-galaxy":{name:"RayOne Galaxy",focus:["DISTANCE","INTERMEDIATE","NEAR","CONTINUOUS"],description:"A non-diffractive spiral optic designed for a smooth, continuous full range of focus. Rayner describes minimized visual disturbances; the night preview still allows a small illustrative glow.",near:"clear"}
+"rayone-galaxy":{name:"RayOne Galaxy",focus:["DISTANCE","INTERMEDIATE","NEAR","FULL RANGE"],description:"A full-range-of-focus spiral IOL designed to provide high-quality vision at distance, intermediate and near, with the aim of reducing dependence on glasses for everyday activities. Individual outcomes vary.",near:"clear"}
 };
 const astigmatismKey=key=>key.includes("astigmatism");
 const cataractKey=key=>key.includes("cataracts");
@@ -206,13 +206,13 @@ function draw(target,condition,lens){
     monofocal:"Monofocal (Distance Focus)",
     "rayone-emv":"RayOne EMV (Increased Range of Focus)",
     trifocal:"Trifocal (Distance, Intermediate & Near)",
-    "rayone-galaxy":"RayOne Galaxy (Continuous Full Range)"
+    "rayone-galaxy":"RayOne Galaxy (Full Range of Focus)"
   };
   const lensInfo={
     monofocal:"A standard monofocal IOL is set for one main focal distance. This demonstration assumes a distance target: road signs and distant cars stay clearer, while nearer dashboard detail is softened.",
     "rayone-emv":"RayOne EMV is an enhanced, non-diffractive monofocal design that extends focus from distance toward intermediate. The demonstration keeps distant details clear and shows more dashboard/intermediate detail than the standard monofocal view. Actual results vary.",
     trifocal:"A trifocal IOL distributes light across distance, intermediate and near focal points. This conceptual night scene may show more halo or glare than non-diffractive designs; actual symptoms vary.",
-    "rayone-galaxy":"RayOne Galaxy uses a non-diffractive spiral optic designed to provide a smooth, continuous range from distance to near, with minimized dysphotopsia. This visual overlay is only illustrative."
+    "rayone-galaxy":"RayOne Galaxy is a full-range-of-focus IOL. Its non-diffractive spiral optic is designed to provide high-quality vision at distance, intermediate and near, with the aim of helping people become less dependent on glasses for everyday activities. It is designed to provide a continuous range of focus; it cannot guarantee that every person will be glasses-free. This scene is an educational illustration, not a clinical prediction."
   };
   $("conditionName"+target).textContent=hasLens?lensTitles[lens]:names[condition];
   $("tip"+target).textContent=hasLens?lensInfo[lens]:conditionInfo[condition];
