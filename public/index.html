@@ -508,6 +508,122 @@ body{padding:0 16px 18px}
   mix-blend-mode:screen;
 }
 
+
+/* FINAL VISUAL CLEANUP
+   Avoid applying a global blur to the video for astigmatism or presbyopia.
+   Keep the base scene sharp; put condition effects on localized overlays. */
+
+/* Cataracts: reduced contrast and a gentle cloudy veil, not a heavy Gaussian blur. */
+.view.pre-iol.state-cataracts .scene-art,
+.view.pre-iol.state-cataracts.state-astig .scene-art{
+  filter:contrast(.82) saturate(.80) brightness(1.035)!important;
+}
+.view.pre-iol.state-cataracts .optical-overlay{
+  opacity:.82!important;
+  filter:none!important;
+  background:
+    radial-gradient(ellipse at 50% 48%,rgba(245,226,193,.16),rgba(219,194,155,.19) 78%),
+    linear-gradient(110deg,rgba(255,245,222,.08),rgba(255,244,220,.16),rgba(255,245,222,.08))!important;
+  mix-blend-mode:screen;
+}
+.view.post-iol.state-cataracts .scene-art{filter:none!important}
+.view.post-iol.state-cataracts:not(.state-astig) .optical-overlay{opacity:0!important}
+
+/* Astigmatism: leave the actual scene sharp. Show soft, offset shadow images only. */
+.view.state-astig .scene-art{filter:none!important}
+.view.state-astig .ghost-art{display:none!important;opacity:0!important}
+.view.state-astig .optical-overlay{
+  opacity:.72!important;
+  filter:blur(2px)!important;
+  background:
+    radial-gradient(ellipse 10% 5% at 39% 39%,rgba(239,232,215,.25),transparent 82%),
+    radial-gradient(ellipse 11% 5% at 41% 41%,rgba(173,184,198,.20),transparent 84%),
+    radial-gradient(ellipse 10% 5% at 64% 39%,rgba(239,232,215,.23),transparent 82%),
+    radial-gradient(ellipse 11% 5% at 66% 41%,rgba(173,184,198,.18),transparent 84%)!important;
+  mix-blend-mode:screen;
+}
+/* Reading: soft shadow around printed lines, not horizontal drawn streaks. */
+.view.state-astig.scene-reading .optical-overlay{
+  opacity:.66!important;
+  filter:blur(2.4px)!important;
+  background:
+    radial-gradient(ellipse 28% 7% at 42% 48%,rgba(72,83,96,.20),transparent 85%),
+    radial-gradient(ellipse 27% 7% at 57% 52%,rgba(72,83,96,.16),transparent 85%),
+    radial-gradient(ellipse 23% 6% at 51% 69%,rgba(72,83,96,.14),transparent 86%)!important;
+  mix-blend-mode:multiply;
+}
+/* Outdoor: displaced soft glows around several lights, with no screen-wide streaks. */
+.view.state-astig.scene-outdoor .optical-overlay{
+  opacity:.70!important;
+  filter:blur(2.2px)!important;
+  background:
+    radial-gradient(ellipse 6% 5% at 17% 24%,rgba(255,231,185,.28),transparent 84%),
+    radial-gradient(ellipse 7% 5% at 19% 26%,rgba(255,231,185,.20),transparent 86%),
+    radial-gradient(ellipse 6% 5% at 42% 18%,rgba(221,232,255,.25),transparent 84%),
+    radial-gradient(ellipse 7% 5% at 44% 20%,rgba(221,232,255,.18),transparent 86%),
+    radial-gradient(ellipse 6% 5% at 69% 29%,rgba(255,215,232,.24),transparent 84%),
+    radial-gradient(ellipse 7% 5% at 71% 31%,rgba(255,215,232,.17),transparent 86%)!important;
+  mix-blend-mode:screen;
+}
+
+/* Combined cataracts + astigmatism: retain the soft cataract veil and add shadows. */
+.view.pre-iol.state-cataracts.state-astig .optical-overlay{
+  opacity:.96!important;
+  filter:blur(2px)!important;
+  background:
+    radial-gradient(ellipse at 50% 48%,rgba(245,226,193,.16),rgba(219,194,155,.19) 78%),
+    radial-gradient(ellipse 10% 5% at 39% 39%,rgba(239,232,215,.22),transparent 82%),
+    radial-gradient(ellipse 11% 5% at 41% 41%,rgba(173,184,198,.17),transparent 84%),
+    radial-gradient(ellipse 10% 5% at 64% 39%,rgba(239,232,215,.20),transparent 82%),
+    radial-gradient(ellipse 11% 5% at 66% 41%,rgba(173,184,198,.16),transparent 84%)!important;
+  mix-blend-mode:screen;
+}
+.view.post-iol.state-cataracts.state-astig .scene-art{filter:none!important}
+
+/* Presbyopia is a near-task effect: do not blur the whole Reading video/page. */
+.view.state-presbyopia.scene-reading .scene-art,
+.view.state-presbyopia-astig.scene-reading .scene-art,
+.view.post-iol.scene-reading.lens-monofocal .scene-art,
+.view.post-iol.scene-reading.lens-rayone-emv .scene-art,
+.view.post-iol.scene-reading.lens-trifocal .scene-art,
+.view.post-iol.scene-reading.lens-rayone-galaxy .scene-art{filter:none!important}
+
+/* Localized soft-focus window over a portion of the printed page; feathered edges. */
+.view.state-presbyopia.scene-reading .focus-overlay{
+  inset:42% 17% 17% 17%!important;
+  border-radius:12px!important;
+  mask-image:linear-gradient(to bottom,transparent 0%,black 16%,black 84%,transparent 100%);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 16%,black 84%,transparent 100%);
+}
+.view.pre-iol.state-presbyopia.scene-reading .focus-overlay,
+.view.pre-iol.state-presbyopia-astig.scene-reading .focus-overlay,
+.view.post-iol.state-presbyopia.scene-reading.lens-monofocal .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-monofocal .focus-overlay{
+  opacity:1!important;
+  backdrop-filter:blur(6px) saturate(.78)!important;
+  -webkit-backdrop-filter:blur(6px) saturate(.78)!important;
+  background:rgba(238,231,213,.10)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-rayone-emv .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-rayone-emv .focus-overlay{
+  opacity:.9!important;
+  backdrop-filter:blur(2.6px) saturate(.9)!important;
+  -webkit-backdrop-filter:blur(2.6px) saturate(.9)!important;
+  background:rgba(238,231,213,.05)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-trifocal .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-trifocal .focus-overlay,
+.view.post-iol.state-presbyopia.scene-reading.lens-rayone-galaxy .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-rayone-galaxy .focus-overlay{
+  opacity:0!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* The combined presbyopia + astigmatism preview retains both localized effects. */
+.view.state-presbyopia-astig.scene-reading .focus-overlay{z-index:1}
+.view.state-presbyopia-astig.scene-reading .optical-overlay{z-index:2}
+
 </style>
 </head>
 <body>
