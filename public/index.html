@@ -64,11 +64,24 @@ body{padding:0 16px 18px}
 .view.state-astig .ghost-art{display:block;filter:blur(1.4px)}
 .view.pre-iol.state-astig .ghost-art{opacity:.32}
 .view.post-iol.state-astig .ghost-art{opacity:.18}
+/* Presbyopia is a near-focus effect: keep distance scenes clear. */
+.view.state-presbyopia.scene-night .scene-art,
+.view.state-presbyopia.scene-day .scene-art,
+.view.state-presbyopia.scene-outdoor .scene-art{filter:none}
+
+/* Before IOL selection, printed content in the Reading scene is softened. */
 .view.pre-iol.state-presbyopia.scene-reading .scene-art{filter:blur(4.2px) brightness(1.03) contrast(.9)}
 .view.pre-iol.state-presbyopia-astig.scene-reading .scene-art{filter:blur(4.4px) brightness(1.02) contrast(.88)}
+
+/* Distance-targeted monofocal: near reading remains soft. */
 .view.post-iol.scene-reading.lens-monofocal .scene-art{filter:blur(4.4px) brightness(1.02)}
+
+/* RayOne EMV extends focus toward intermediate, so near reading is still a little soft. */
 .view.post-iol.scene-reading.lens-rayone-emv .scene-art{filter:blur(2.6px) brightness(1.02)}
-.view.post-iol.scene-reading.lens-trifocal .scene-art,.view.post-iol.scene-reading.lens-rayone-galaxy .scene-art{filter:none}
+
+/* Trifocal and Galaxy are shown with a clearer near-reading preview. */
+.view.post-iol.scene-reading.lens-trifocal .scene-art,
+.view.post-iol.scene-reading.lens-rayone-galaxy .scene-art{filter:none}
 .view.post-iol.scene-night.lens-trifocal .optical-overlay{opacity:.78;background:radial-gradient(ellipse 13% 24% at 37% 40%,rgba(255,237,177,.50),transparent 72%),radial-gradient(ellipse 15% 26% at 64% 40%,rgba(255,237,177,.48),transparent 72%);mix-blend-mode:screen}
 .view.post-iol.scene-night.lens-rayone-galaxy .optical-overlay{opacity:.14;background:radial-gradient(ellipse 9% 16% at 37% 40%,rgba(255,237,177,.32),transparent 72%),radial-gradient(ellipse 10% 17% at 64% 40%,rgba(255,237,177,.30),transparent 72%);mix-blend-mode:screen}
 .view.post-iol.scene-night.lens-rayone-emv .optical-overlay{opacity:.08;background:radial-gradient(ellipse 8% 14% at 37% 40%,rgba(255,237,177,.22),transparent 72%),radial-gradient(ellipse 8% 14% at 64% 40%,rgba(255,237,177,.22),transparent 72%);mix-blend-mode:screen}
@@ -150,8 +163,8 @@ const names={cataracts:"Cataracts","cataracts-astigmatism":"Cataracts + Astigmat
 const conditionInfo={
 cataracts:"A cataract clouds the natural lens. Before an IOL is chosen, this view shows overall haze, softened details, lower contrast and extra light scatter (especially noticeable around night lights). Cataract surgery removes the cloudy natural lens; the post-IOL preview therefore clears this haze.",
 "cataracts-astigmatism":"This combines the cloudy, lower-contrast cataract view with astigmatism-like directional ghosting. After cataract removal, the haze is cleared in this preview, but astigmatism can remain unless it is also treated or an appropriate toric IOL is selected.",
-presbyopia:"Presbyopia is the age-related loss of near focusing ability. This preset blurs close objects in the Reading scene while leaving distance scenes comparatively clear. The selected IOL profile changes how near focus is illustrated.",
-"presbyopia-astigmatism":"This combines near-focus difficulty with astigmatic distortion. The reading scene shows near blur, while ghosting can affect both near and far scenes. Astigmatism correction depends on the treatment plan and any toric lens used."
+presbyopia:"Presbyopia is the age-related loss of near focusing ability. Before an IOL is selected, the printed words in the Reading scene become soft and blurry. Day Driving, Night Driving and Outdoor remain clear because they represent distant viewing. After an IOL is selected, the Reading scene changes according to that lens's illustrative near-focus range.",
+"presbyopia-astigmatism":"This combines near-focus difficulty with astigmatic distortion. Printed words in the Reading scene become blurry, while directional ghosting can affect both near and far scenes. Day Driving, Night Driving and Outdoor remain clear of presbyopia blur. The selected IOL changes the near-reading preview; astigmatism correction still depends on the treatment plan and an appropriate toric option where indicated."
 };
 const lensProfiles={
 monofocal:{name:"Monofocal",focus:["DISTANCE"],description:"One focal distance. This demo assumes a distance-targeted lens, so reading may remain soft; near glasses are commonly needed.",near:"blur"},
