@@ -14,8 +14,8 @@ Connect this GitHub repository to Cloudflare Pages with:
 - Production branch: `main`
 - Framework preset: `None` / `Other`
 - Build command: leave blank
-- Build output directory: `/` (repository root)
-- Root directory: `/`
+- Build output directory: `.` (repository root, where `index.html` lives)
+- Root directory: leave at the repository root
 - Environment variables: none
 
 The site is a single `index.html` file with embedded CSS, SVG scenes, and JavaScript. No package install or build command is needed.
