@@ -888,6 +888,36 @@ body.settings-hidden .controls,body.settings-hidden .lens-profile{display:none!i
   background:none!important;
 }
 
+
+/* PRESBYOPIA REVISION: remove the floating blur patch completely.
+   Treat the coffeehouse view as a near/intermediate task and soften the whole
+   captured scene naturally, with a graduated amount for each IOL profile. */
+.view.state-presbyopia.scene-reading .focus-overlay,
+.view.state-presbyopia-astig.scene-reading .focus-overlay{
+  display:none!important;
+}
+.view.pre-iol.state-presbyopia.scene-reading .scene-art,
+.view.pre-iol.state-presbyopia-astig.scene-reading .scene-art{
+  filter:blur(3.1px) saturate(.88) contrast(.96)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-monofocal .scene-art,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-monofocal .scene-art{
+  filter:blur(3.2px) saturate(.88) contrast(.96)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-rayone-emv .scene-art,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-rayone-emv .scene-art{
+  filter:blur(1.7px) saturate(.94)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-trifocal .scene-art,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-trifocal .scene-art,
+.view.post-iol.state-presbyopia.scene-reading.lens-rayone-galaxy .scene-art,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-rayone-galaxy .scene-art{
+  filter:none!important;
+}
+.view.state-presbyopia.scene-reading .optical-overlay{
+  opacity:0!important;background:none!important;filter:none!important;
+}
+
 </style>
 </head>
 <body>
