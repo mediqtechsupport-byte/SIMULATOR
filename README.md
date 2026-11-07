@@ -43,6 +43,11 @@ The behavior descriptions are based on general educational descriptions from:
 - [Rayner — Trifocal IOLs](https://rayner.com/global/en/iol/trifocal/)
 - [Rayner — RayOne Galaxy](https://rayner.com/us/rayner-announces-fda-approval-of-galaxy-the-worlds-first-spiral-iol/)
 
+
+## Night-driving video credit and reuse terms
+
+The Night Driving scene uses the 16-second clip [“Cars Passing by at Night”](https://commons.wikimedia.org/wiki/File:Cars_Passing_by_at_Night.webm) by Maximilian Schönherr, licensed under [Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/). The video is streamed from Wikimedia Commons rather than copied into this repository. It is looped in the simulator and displayed with CSS-based illustrative viewing effects. The adapted presentation of this clip is shared under CC BY-SA 4.0; this attribution does not imply endorsement by the creator.
+
 ## Run locally
 Open `index.html` in a modern browser, or run `python -m http.server 8000` from the repository root and open `http://localhost:8000`.
 
