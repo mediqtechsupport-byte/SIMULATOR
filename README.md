@@ -23,6 +23,26 @@ To enable automatic deployments:
 
 The Wrangler configuration's `name` must match the existing Worker name `simulator`.
 
+
+## How the condition and IOL selectors interact
+
+- With **Select Lens** still selected, the scene illustrates the selected eye-condition preset (a simplified pre-IOL view).
+- Selecting an IOL switches the view to a simplified post-IOL concept. The cataract haze is removed because cataract surgery replaces the cloudy natural lens.
+- The combined astigmatism presets retain mild directional ghosting in this demo. The listed lens selections are not explicitly toric variants; real astigmatism correction depends on the measured cylinder, surgical plan, and an appropriate toric option where indicated.
+- Presbyopia mainly softens the Reading scene. A distance-targeted monofocal keeps near work soft; RayOne EMV extends distance toward intermediate; trifocal offers distance/intermediate/near focal points; RayOne Galaxy is designed for a continuous range.
+- Night-driving halo overlays are conceptual illustrations of possible photic effects, not expected or guaranteed patient outcomes.
+
+## Educational sources
+
+The behavior descriptions are based on general educational descriptions from:
+- [American Academy of Ophthalmology — IOL types and focusing distances](https://www.aao.org/eye-health/diseases/cataracts-iol-implants)
+- [National Eye Institute — Cataracts](https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/cataracts)
+- [National Eye Institute — Astigmatism](https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/astigmatism)
+- [National Eye Institute — Presbyopia](https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/presbyopia)
+- [Rayner — RayOne EMV](https://rayner.com/global/en/iol/rayone-emv/)
+- [Rayner — Trifocal IOLs](https://rayner.com/global/en/iol/trifocal/)
+- [Rayner — RayOne Galaxy](https://rayner.com/us/rayner-announces-fda-approval-of-galaxy-the-worlds-first-spiral-iol/)
+
 ## Run locally
 Open `index.html` in a modern browser, or run `python -m http.server 8000` from the repository root and open `http://localhost:8000`.
 
