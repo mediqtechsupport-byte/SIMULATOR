@@ -44,6 +44,11 @@ The Pexels license permits use on websites and apps, does not require attributio
 - Presbyopia mainly softens the Reading scene. A distance-targeted monofocal keeps near work soft; RayOne EMV extends distance toward intermediate; trifocal offers distance/intermediate/near focal points; RayOne Galaxy is designed for a continuous range.
 - Night-driving halo overlays are conceptual illustrations of possible photic effects, not expected or guaranteed patient outcomes.
 
+
+- **Monofocal vs RayOne EMV in driving scenes:** both retain distance detail; the standard monofocal preset softens the nearer dashboard/intermediate region more, while RayOne EMV retains more intermediate detail to illustrate its increased range of focus.
+- **Reading scene:** the distance-targeted monofocal preset is softened most; RayOne EMV is shown as an intermediate/near transition; trifocal and Galaxy presets are clearer at the near task.
+- **Night effects:** the trifocal preset uses a more visible halo illustration; Galaxy's glow is milder, in line with Rayner's description of minimized dysphotopsia. These are teaching overlays, not patient-specific optical predictions.
+
 ## Educational sources
 
 The behavior descriptions are based on general educational descriptions from:
