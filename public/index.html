@@ -684,6 +684,69 @@ body{padding:0 16px 18px}
 body.settings-hidden .controls,body.settings-hidden .lens-profile{display:none!important}
 @media(max-width:720px){.utility-bar{padding:10px 4px 0}}
 
+
+/* Condition rendering: use a real displaced second image for astigmatic shadowing.
+   The second media layer is populated by draw() and follows the primary video. */
+.view.state-astig .scene-art{filter:none!important}
+.view.state-astig .ghost-art{
+  display:block!important;
+  opacity:.34!important;
+  transform:translate(8px,2px) scale(1.005)!important;
+  filter:blur(1px) brightness(.70) saturate(.72) contrast(1.08)!important;
+  mix-blend-mode:normal!important;
+}
+.view.post-iol.state-astig .ghost-art{opacity:.25!important}
+.view.pre-iol.state-astig .ghost-art{opacity:.38!important}
+
+/* Cataracts add a full-field cloudy veil; surgery removes that veil, not astigmatism. */
+.view.pre-iol.state-cataracts .scene-art{
+  filter:blur(2.7px) sepia(.24) brightness(1.06) contrast(.68) saturate(.72)!important;
+}
+.view.pre-iol.state-cataracts .optical-overlay{
+  opacity:1!important;
+  background:radial-gradient(ellipse at 50% 45%,rgba(247,219,166,.13),rgba(224,177,105,.23) 70%),linear-gradient(110deg,rgba(245,202,133,.10),rgba(255,244,213,.22),rgba(245,202,133,.10))!important;
+  mix-blend-mode:screen!important;
+}
+.view.pre-iol.state-cataracts.state-astig .ghost-art{
+  filter:blur(2px) sepia(.18) brightness(.70) saturate(.68) contrast(.82)!important;
+}
+.view.post-iol.state-cataracts.state-astig .scene-art{filter:none!important}
+.view.post-iol.state-cataracts.state-astig .optical-overlay{opacity:0!important;background:none!important}
+
+/* Astigmatism alone should look like a directional soft shadow, not whole-screen blur. */
+.view.state-astig:not(.state-cataracts) .optical-overlay{
+  opacity:0!important;background:none!important;filter:none!important;
+}
+
+/* Presbyopia is limited to near print in Reading; distant scenes stay clear. */
+.view.state-presbyopia.scene-reading .scene-art,
+.view.state-presbyopia.scene-night .scene-art,
+.view.state-presbyopia.scene-outdoor .scene-art{filter:none!important}
+.view.state-presbyopia.scene-reading .focus-overlay{
+  inset:42% 17% 17% 17%!important;
+  border-radius:12px!important;
+  mask-image:linear-gradient(to bottom,transparent 0%,black 16%,black 84%,transparent 100%)!important;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 16%,black 84%,transparent 100%)!important;
+}
+.view.pre-iol.state-presbyopia.scene-reading .focus-overlay,
+.view.pre-iol.state-presbyopia-astig.scene-reading .focus-overlay,
+.view.post-iol.state-presbyopia.scene-reading.lens-monofocal .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-monofocal .focus-overlay{
+  opacity:1!important;backdrop-filter:blur(6px) saturate(.78)!important;
+  -webkit-backdrop-filter:blur(6px) saturate(.78)!important;background:rgba(238,231,213,.10)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-rayone-emv .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-rayone-emv .focus-overlay{
+  opacity:.9!important;backdrop-filter:blur(2.6px) saturate(.9)!important;
+  -webkit-backdrop-filter:blur(2.6px) saturate(.9)!important;background:rgba(238,231,213,.05)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-trifocal .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-trifocal .focus-overlay,
+.view.post-iol.state-presbyopia.scene-reading.lens-rayone-galaxy .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-rayone-galaxy .focus-overlay{
+  opacity:0!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+
 </style>
 </head>
 <body>
@@ -762,7 +825,7 @@ function setProfile(target,key){
 }
 function draw(target,condition,lens){
   const scene=$("scene").value,view=$("view"+target),hasLens=Boolean(lens),hasCataract=cataractKey(condition),hasAstig=astigmatismKey(condition),hasPresbyopia=presbyopiaKey(condition);
-  $("scene"+target).innerHTML=sceneMedia(scene);$("ghost"+target).innerHTML="";
+  $("scene"+target).innerHTML=sceneMedia(scene);$("ghost"+target).innerHTML=hasAstig?sceneMedia(scene):"";
   const classes=["view","scene-"+scene,hasLens?"post-iol":"pre-iol",hasCataract?"state-cataracts":"",hasAstig?"state-astig":"",hasPresbyopia?"state-presbyopia":""];
   ["scene"+target,"ghost"+target].forEach(id=>{
     const root=$(id),media=root.querySelector("video");
@@ -787,6 +850,22 @@ function draw(target,condition,lens){
       });
     }
   });
+  /* Keep the displaced astigmatism shadow in step with the live scene video. */
+  if(hasAstig){
+    const primary=$("scene"+target).querySelector("video");
+    const shadow=$("ghost"+target).querySelector("video");
+    if(primary&&shadow){
+      const syncShadow=()=>{
+        if(Number.isFinite(primary.currentTime)&&Number.isFinite(shadow.currentTime)&&
+           !shadow.seeking&&Math.abs(primary.currentTime-shadow.currentTime)>.12){
+          try{shadow.currentTime=primary.currentTime}catch(_error){}
+        }
+      };
+      primary.addEventListener("timeupdate",syncShadow);
+      primary.addEventListener("seeking",syncShadow);
+      shadow.addEventListener("loadedmetadata",syncShadow,{once:true});
+    }
+  }
   if(hasPresbyopia&&hasAstig)classes.push("state-presbyopia-astig");
   if(lens)classes.push("lens-"+lens);
   view.className=classes.filter(Boolean).join(" ");
@@ -803,7 +882,7 @@ function draw(target,condition,lens){
     "rayone-galaxy":"RayOne Galaxy is a full-range-of-focus IOL. Its non-diffractive spiral optic is designed to provide high-quality vision at distance, intermediate and near, with the aim of helping people become less dependent on glasses for everyday activities. In this educational preview, its Outdoor and night-scene lights have a softer diffuse glow without the pronounced concentric rings used for the trifocal illustration. It cannot guarantee that every person will be glasses-free; individual outcomes vary."
   };
   $("conditionName"+target).textContent=hasLens?(lensTitles[lens]+" · "+names[condition]):names[condition];
-  $("tip"+target).textContent=hasLens?lensInfo[lens]:conditionInfo[condition];
+  $("tip"+target).textContent=(hasLens?lensInfo[lens]:conditionInfo[condition])+(hasAstig?" Astigmatism remains illustrated after these IOL selections because the current lens choices are not labelled as toric. In clinical practice, astigmatism correction may require a toric IOL or another suitable treatment.":"");
 
 }
 function update(){
