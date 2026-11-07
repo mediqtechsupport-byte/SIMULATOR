@@ -33,7 +33,12 @@ body{padding:0 16px 18px}
 .scene-art,.ghost-art{position:absolute;inset:0;width:100%;height:100%;display:block;transition:filter .24s ease,opacity .24s ease;transform:scale(1.005)}
 .ghost-art{display:none;opacity:.2;mix-blend-mode:screen;transform:translate(4px,-2px) scale(1.005);pointer-events:none}
 .scene-art video,.ghost-art video{width:100%;height:100%;display:block;object-fit:cover}
-.scene-video{width:100%;height:100%;object-fit:cover;display:block}
+.scene-art,.ghost-art{overflow:hidden}
+.video-poster{position:absolute;inset:0;transition:opacity .35s ease}
+.video-poster svg{width:100%;height:100%;display:block}
+.scene-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .35s ease}
+.scene-art.video-ready .scene-video,.ghost-art.video-ready .scene-video{opacity:1}
+.scene-art.video-ready .video-poster,.ghost-art.video-ready .video-poster{opacity:0}
 .asset-credit{margin:5px 3px 0;color:#84929c;font-size:9px;line-height:1.45}
 @media(prefers-reduced-motion:reduce){.scene-video{animation:none}}
 
@@ -106,7 +111,7 @@ body{padding:0 16px 18px}
   <article class="view condition-cataracts" id="viewA"><div class="scene-art" id="sceneA"></div><div class="ghost-art" id="ghostA"></div><div class="optical-overlay"></div><div class="focus-overlay"></div><div class="view-title"><span id="conditionNameA">Cataracts</span><button class="info" type="button" aria-label="About this condition" aria-expanded="false" data-tip="tipA">i</button></div><div class="tooltip" id="tipA" hidden>Cataract-like haze is shown as a simplified reduction in clarity and contrast. The effect is illustrative, not a clinical model.</div><div class="view-mark" id="markA">ILLUSTRATIVE VIEW</div></article>
   <article class="view condition-cataracts hidden" id="viewB"><div class="scene-art" id="sceneB"></div><div class="ghost-art" id="ghostB"></div><div class="optical-overlay"></div><div class="focus-overlay"></div><div class="view-title"><span id="conditionNameB">Cataracts</span><button class="info" type="button" aria-label="About this condition" aria-expanded="false" data-tip="tipB">i</button></div><div class="tooltip" id="tipB" hidden>Cataract-like haze is shown as a simplified reduction in clarity and contrast. The effect is illustrative, not a clinical model.</div><div class="view-mark" id="markB">COMPARISON VIEW</div></article>
 </section>
-<p style="margin:10px 3px 0;color:#8d9aa5;font-size:10px;line-height:1.45">Educational demonstration only. Visual effects are simplified approximations and do not predict an individual’s vision or surgical outcome. Lens choice should be discussed with a qualified eye-care professional.</p><p class="asset-credit">Video credits: Night Driving — “Cars Passing by at Night” by Maximilian Schönherr, Wikimedia Commons, CC BY-SA 4.0; Day Driving — “Driving at Daytime” by I Am Sorin, Pexels free-use license (fallback: “ROAD VIEW” by Niyati Sharma 1505, Wikimedia Commons, CC BY-SA 4.0); Reading — “Close-Up Video Of Person Reading A Book” by Olia Danilevich, Pexels free-use license; Outdoor — “Mountain Scenery During Daytime” by Mikhail Nilov, Pexels free-use license (fallback: “Mountain Landscape near Nathu La Pass, Sikkim” by Rajani Gairshail, Wikimedia Commons, CC BY-SA 4.0). All clips are looped and displayed with simplified visual overlays. <a href="https://commons.wikimedia.org/wiki/File:Cars_Passing_by_at_Night.webm" target="_blank" rel="noopener" style="color:#a9c9d6">Night source</a> · <a href="https://www.pexels.com/video/driving-at-daytime-9109808/" target="_blank" rel="noopener" style="color:#a9c9d6">Day source</a> · <a href="https://commons.wikimedia.org/wiki/File:ROAD_VIEW.webm" target="_blank" rel="noopener" style="color:#a9c9d6">Day fallback</a> · <a href="https://www.pexels.com/video/close-up-video-of-person-reading-a-book-4625318/" target="_blank" rel="noopener" style="color:#a9c9d6">Reading source</a> · <a href="https://www.pexels.com/video/mountain-scenery-during-daytime-6989136/" target="_blank" rel="noopener" style="color:#a9c9d6">Outdoor source</a> · <a href="https://commons.wikimedia.org/wiki/File:Mountain_Landscape_near_Nathu_La_Pass,_Sikkim.webm" target="_blank" rel="noopener" style="color:#a9c9d6">Outdoor fallback</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener" style="color:#a9c9d6">CC BY-SA 4.0</a> · <a href="https://www.pexels.com/license/" target="_blank" rel="noopener" style="color:#a9c9d6">Pexels license</a>.</p>
+<p style="margin:10px 3px 0;color:#8d9aa5;font-size:10px;line-height:1.45">Educational demonstration only. Visual effects are simplified approximations and do not predict an individual’s vision or surgical outcome. Lens choice should be discussed with a qualified eye-care professional.</p><p class="asset-credit">Video credits: Night Driving — “POV night drive in city, vibrant nightlife through car windshield” by Orhan Pergel, Pexels; Day Driving — “Driving at Daytime” by I Am Sorin, Pexels, slowed to 65% playback; Reading — “Close-Up Video Of Person Reading A Book” by Olia Danilevich, Pexels; Outdoor — “Vibrant Nightlife in Bustling Asian Street Market” by Media Dung, Pexels. Clips stream from Pexels and are used under its free-use license. <a href="https://www.pexels.com/video/a-car-driving-through-a-city-at-night-19830439/" target="_blank" rel="noopener" style="color:#a9c9d6">Night source</a> · <a href="https://www.pexels.com/video/driving-at-daytime-9109808/" target="_blank" rel="noopener" style="color:#a9c9d6">Day source</a> · <a href="https://www.pexels.com/video/close-up-video-of-person-reading-a-book-4625318/" target="_blank" rel="noopener" style="color:#a9c9d6">Reading source</a> · <a href="https://www.pexels.com/video/vibrant-nightlife-in-bustling-asian-street-market-29192124/" target="_blank" rel="noopener" style="color:#a9c9d6">Outdoor source</a> · <a href="https://www.pexels.com/license/" target="_blank" rel="noopener" style="color:#a9c9d6">Pexels license</a>.</p>
 </main>
 <script>
 const $=id=>document.getElementById(id);
@@ -116,24 +121,25 @@ day:`<svg viewBox="0 0 1600 850" xmlns="http://www.w3.org/2000/svg" preserveAspe
 reading:`<svg viewBox="0 0 1600 850" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="room" x2="0" y2="1"><stop stop-color="#e9e4d8"/><stop offset="1" stop-color="#9b826b"/></linearGradient></defs><rect width="1600" height="850" fill="url(#room)"/><rect x="100" y="80" width="430" height="300" rx="6" fill="#9ebac0"/><path d="M100 330q120-110 220-20t210-15v85H100z" fill="#6f927d"/><rect x="0" y="575" width="1600" height="275" fill="#77583e"/><path d="M330 250q-35-25-18 30l105 365q11 35 45 24l420-126q34-10 22-43L800 130q-10-32-44-21z" fill="#f6f1e2" stroke="#a8a39a" stroke-width="10"/><path d="M805 130l265 530" stroke="#d2c9b5" stroke-width="9"/><g stroke="#9b9c95" stroke-width="8" opacity=".8"><path d="M440 335l270-83M470 390l270-83M500 445l270-83M530 500l270-83M560 555l270-83"/></g><rect x="1150" y="210" width="230" height="330" rx="18" fill="#455d66"/><rect x="1165" y="228" width="200" height="290" rx="10" fill="#b4d0c8"/><circle cx="1265" cy="365" r="54" fill="#e5d1a4"/></svg>`,
 outdoor:`<svg viewBox="0 0 1600 850" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="outSky" x2="0" y2="1"><stop stop-color="#7ec1da"/><stop offset="1" stop-color="#e2e6cb"/></linearGradient><linearGradient id="water" x2="0" y2="1"><stop stop-color="#8ac2c7"/><stop offset="1" stop-color="#3c7b86"/></linearGradient></defs><rect width="1600" height="850" fill="url(#outSky)"/><circle cx="1300" cy="135" r="58" fill="#fff0b7"/><path d="M0 510L210 230l210 260 250-340 230 330 210-270 220 290 170-180 100 190v340H0z" fill="#718b7e"/><path d="M670 150l250 330-80-42-45 35-60-49-50 33-50-43-44 12zM1110 210l220 290-74-31-52 24-51-42-40 30-47-32-41 11z" fill="#e6ece2"/><path d="M0 530q300-80 590 0t500 0 510 0v320H0z" fill="#79a079"/><path d="M0 650q320-50 640 0t960 0v200H0z" fill="url(#water)"/><path d="M0 700q260-30 520 0t520 0 560 0M0 770q260-30 520 0t520 0 560 0" stroke="#d8eeee" stroke-width="5" opacity=".4" fill="none"/></svg>`
 };
-const videoClip=(sources,label)=>'<video class="scene-video" autoplay muted loop playsinline preload="metadata" aria-label="'+label+'">'+sources.map(([src,type])=>'<source src="'+src+'" type="'+type+'">').join("")+'</video>';
+const videoClip=(sources,label,rate=1,poster="")=>'<div class="video-poster">'+poster+'</div><video class="scene-video" autoplay muted loop playsinline preload="metadata" data-playback-rate="'+rate+'" aria-label="'+label+'">'+sources.map(([src,type])=>'<source src="'+src+'" type="'+type+'">').join("")+'</video>';
 const sceneClips={
 night:videoClip([
-["https://upload.wikimedia.org/wikipedia/commons/f/fa/Cars_Passing_by_at_Night.webm","video/webm"]
-],"Cars passing by at night"),
+["https://videos.pexels.com/video-files/19830439/19830439-uhd_3840_2160_25fps.mp4","video/mp4"],
+["https://www.pexels.com/download/video/19830439/","video/mp4"]
+],"POV night drive through city traffic",1,scenes.night.svg),
 day:videoClip([
 ["https://videos.pexels.com/video-files/9109808/9109808-hd_1920_1080_30fps.mp4","video/mp4"],
 ["https://videos.pexels.com/video-files/9109808/9109808-uhd_3840_2160_30fps.mp4","video/mp4"],
-["https://upload.wikimedia.org/wikipedia/commons/4/4e/ROAD_VIEW.webm","video/webm"]
-],"Daytime road driving"),
+["https://www.pexels.com/download/video/9109808/","video/mp4"]
+],"Slow daytime countryside POV drive",0.65,scenes.day.svg),
 reading:videoClip([
 ["https://videos.pexels.com/video-files/4625318/4625318-hd_1920_1080_25fps.mp4","video/mp4"],
 ["https://videos.pexels.com/video-files/4625318/4625318-uhd_3840_2160_25fps.mp4","video/mp4"]
-],"Close-up of a person reading a book"),
+],"Close-up of a person reading a book",1,scenes.reading.svg),
 outdoor:videoClip([
-["https://videos.pexels.com/video-files/6989136/6989136-hd_1920_1080_25fps.mp4","video/mp4"],
-["https://upload.wikimedia.org/wikipedia/commons/4/4e/Mountain_Landscape_near_Nathu_La_Pass%2C_Sikkim.webm","video/webm"]
-],"Mountain scenery in daylight")
+["https://videos.pexels.com/video-files/29192124/12605100_3840_2160_25fps.mp4","video/mp4"],
+["https://www.pexels.com/download/video/29192124/","video/mp4"]
+],"Crowded Asian night market with colorful neon signs",0.9,scenes.outdoor.svg)
 };
 const sceneMedia=scene=>sceneClips[scene]||scenes[scene];
 const names={cataracts:"Cataracts","cataracts-astigmatism":"Cataracts + Astigmatism",presbyopia:"Presbyopia","presbyopia-astigmatism":"Presbyopia + Astigmatism"};
@@ -166,7 +172,19 @@ function draw(target,condition,lens){
   ["scene"+target,"ghost"+target].forEach(id=>{
     const root=$(id),media=root.querySelector("video");
     if(media){
-      media.addEventListener("error",()=>{root.innerHTML=scenes[scene];},{once:true});
+      const applySpeed=()=>{
+        const speed=Math.max(.5,Math.min(1.5,Number(media.dataset.playbackRate)||1));
+        media.defaultPlaybackRate=speed;
+        media.playbackRate=speed;
+      };
+      media.addEventListener("loadedmetadata",applySpeed,{once:true});
+      media.addEventListener("canplay",applySpeed,{once:true});
+      media.addEventListener("playing",()=>root.classList.add("video-ready"),{once:true});
+      applySpeed();
+      media.addEventListener("error",()=>{
+        root.classList.remove("video-ready");
+        root.innerHTML=scenes[scene];
+      },{once:true});
       media.addEventListener("timeupdate",()=>{
         const end=Number(media.dataset.loopEnd);
         if(end>0&&media.currentTime>=end)media.currentTime=0;
