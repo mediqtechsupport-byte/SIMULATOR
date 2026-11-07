@@ -29,7 +29,7 @@ The Wrangler configuration's `name` must match the existing Worker name `simulat
 
 The scene selector streams video from Pexels. The same source footage is used in both comparison panels so lens overlays can be compared against the same moving scene.
 
-- **Night Driving:** “POV night drive in city, vibrant nightlife through car windshield” by Orhan Pergel. [Pexels clip](https://www.pexels.com/video/a-car-driving-through-a-city-at-night-19830439/)
+- **Night Driving:** “Night Drive Through City Streets” by Mirza Muneeb, Pexels, 15 seconds, 4K (3840 × 2160), 16:9, POV evening drive through illuminated urban streetlights. [Pexels clip](https://www.pexels.com/video/night-drive-through-city-streets-40375353/). Backup: “A Car Driving Down the Road at Night” by Orhan Pergel. [Pexels clip](https://www.pexels.com/video/a-car-driving-down-the-road-at-night-19830542/).
 - **Reading:** Main clip: “A Woman Sitting on Her Desk while Holding a Book and Her Phone” by Polina Tankilevitch, Pexels, 3 seconds, 1920×1080, 16:9. [Source](https://www.pexels.com/video/a-woman-sitting-on-her-desk-while-holding-a-book-and-her-phone-6927292/). Longer backup: “A Woman Having a Phone Call While Holding a Book” by KoolShooters, Pexels, 32 seconds, 4K. [Source](https://www.pexels.com/video/a-woman-having-a-phone-call-while-holding-a-book-8946363/). If those clips cannot load, the scene falls back to printed-page footage: “Pages of an Open Book” by Tima Miroshnichenko [source](https://www.pexels.com/video/pages-of-an-open-book-7034147/) and “Close Up Video of an Open Book” by SHVETS production [source](https://www.pexels.com/video/close-up-video-of-an-open-book-7034161/).
 - **Outdoor:** “Vibrant Nightlife in Bustling Asian Street Market” by Media Dung. The listed clip is 35 seconds, 4K (3840 × 2160), 16:9 and 25 fps. [Pexels clip](https://www.pexels.com/video/vibrant-nightlife-in-bustling-asian-street-market-29192124/)
 
@@ -63,7 +63,7 @@ The behavior descriptions are based on general educational descriptions from:
 
 ## Night-driving video credit and reuse terms
 
-The Night Driving scene uses the 16-second clip [“Cars Passing by at Night”](https://commons.wikimedia.org/wiki/File:Cars_Passing_by_at_Night.webm) by Maximilian Schönherr, licensed under [Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/). The video is streamed from Wikimedia Commons rather than copied into this repository. It is looped in the simulator and displayed with CSS-based illustrative viewing effects. The adapted presentation of this clip is shared under CC BY-SA 4.0; this attribution does not imply endorsement by the creator.
+The Night Driving clip is streamed from Pexels under its [free-use license](https://www.pexels.com/license/), rather than copied into this repository. The source footage is looped in the simulator and displayed with a modest exposure lift and educational visual overlays.
 
 ## Run locally
 Open `index.html` in a modern browser, or run `python -m http.server 8000` from the repository root and open `http://localhost:8000`.
