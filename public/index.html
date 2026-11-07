@@ -424,6 +424,17 @@ body{padding:0 16px 18px}
     radial-gradient(circle at 69% 29%,transparent 0 1%,rgba(255,191,222,.16) 1.15% 1.32%,transparent 1.48% 1.9%)!important;
 }
 
+
+/* Keep astigmatic distortion visible on close-up printed material as well. */
+.view.state-astig.scene-reading .optical-overlay{
+  opacity:.72!important;
+  background:
+    linear-gradient(0deg,transparent 30%,rgba(70,104,133,.18) 31%,transparent 34%),
+    linear-gradient(0deg,transparent 53%,rgba(70,104,133,.22) 54%,transparent 57%),
+    linear-gradient(0deg,transparent 74%,rgba(70,104,133,.16) 75%,transparent 78%)!important;
+  mix-blend-mode:multiply;
+}
+
 </style>
 </head>
 <body>
@@ -538,7 +549,7 @@ function draw(target,condition,lens){
     trifocal:"A trifocal IOL provides separate distance, intermediate and near focal points. In this educational preview, coloured lights in the Outdoor scene and lights at night have more pronounced concentric halo rings. These are illustrative effects, not a prediction of symptoms for an individual.",
     "rayone-galaxy":"RayOne Galaxy is a full-range-of-focus IOL. Its non-diffractive spiral optic is designed to provide high-quality vision at distance, intermediate and near, with the aim of helping people become less dependent on glasses for everyday activities. In this educational preview, its Outdoor and night-scene lights have a softer diffuse glow without the pronounced concentric rings used for the trifocal illustration. It cannot guarantee that every person will be glasses-free; individual outcomes vary."
   };
-  $("conditionName"+target).textContent=hasLens?lensTitles[lens]:names[condition];
+  $("conditionName"+target).textContent=hasLens?(lensTitles[lens]+" · "+names[condition]):names[condition];
   $("tip"+target).textContent=hasLens?lensInfo[lens]:conditionInfo[condition];
 
 }
