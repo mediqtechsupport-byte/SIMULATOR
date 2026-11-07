@@ -38,6 +38,19 @@ body{padding:0 16px 18px}
 @media(prefers-reduced-motion:reduce){.scene-video{animation:none}}
 
 .optical-overlay{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;transition:opacity .24s ease}
+
+.focus-overlay{position:absolute;z-index:1;inset:46% 0 0;pointer-events:none;opacity:0;transition:opacity .24s ease;backdrop-filter:none}
+.view.post-iol.scene-night.lens-monofocal .focus-overlay,
+.view.post-iol.scene-day.lens-monofocal .focus-overlay{opacity:1;backdrop-filter:blur(2.4px)}
+.view.post-iol.scene-night.lens-rayone-emv .focus-overlay,
+.view.post-iol.scene-day.lens-rayone-emv .focus-overlay{opacity:1;backdrop-filter:blur(.65px)}
+.view.post-iol.scene-night.lens-trifocal .focus-overlay,
+.view.post-iol.scene-night.lens-rayone-galaxy .focus-overlay{opacity:0}
+.view.post-iol.scene-reading.lens-monofocal .scene-art{filter:blur(4.4px) brightness(1.02)}
+.view.post-iol.scene-reading.lens-rayone-emv .scene-art{filter:blur(2.6px) brightness(1.02)}
+.view.post-iol.scene-reading.lens-trifocal .scene-art,
+.view.post-iol.scene-reading.lens-rayone-galaxy .scene-art{filter:none}
+
 .view.pre-iol.state-cataracts .scene-art{filter:blur(2.7px) sepia(.24) brightness(1.06) contrast(.68) saturate(.72)}
 .view.pre-iol.state-cataracts .optical-overlay{opacity:1;background:radial-gradient(ellipse at 50% 45%,rgba(247,219,166,.13),rgba(224,177,105,.23) 70%),linear-gradient(110deg,rgba(245,202,133,.10),rgba(255,244,213,.22),rgba(245,202,133,.10));mix-blend-mode:screen}
 .view.state-astig .ghost-art{display:block;filter:blur(1.4px)}
@@ -49,7 +62,7 @@ body{padding:0 16px 18px}
 .view.post-iol.scene-reading.lens-rayone-emv .scene-art{filter:blur(2.6px) brightness(1.02)}
 .view.post-iol.scene-reading.lens-trifocal .scene-art,.view.post-iol.scene-reading.lens-rayone-galaxy .scene-art{filter:none}
 .view.post-iol.scene-night.lens-trifocal .optical-overlay{opacity:.78;background:radial-gradient(ellipse 13% 24% at 37% 40%,rgba(255,237,177,.50),transparent 72%),radial-gradient(ellipse 15% 26% at 64% 40%,rgba(255,237,177,.48),transparent 72%);mix-blend-mode:screen}
-.view.post-iol.scene-night.lens-rayone-galaxy .optical-overlay{opacity:.26;background:radial-gradient(ellipse 9% 16% at 37% 40%,rgba(255,237,177,.32),transparent 72%),radial-gradient(ellipse 10% 17% at 64% 40%,rgba(255,237,177,.30),transparent 72%);mix-blend-mode:screen}
+.view.post-iol.scene-night.lens-rayone-galaxy .optical-overlay{opacity:.14;background:radial-gradient(ellipse 9% 16% at 37% 40%,rgba(255,237,177,.32),transparent 72%),radial-gradient(ellipse 10% 17% at 64% 40%,rgba(255,237,177,.30),transparent 72%);mix-blend-mode:screen}
 .view.post-iol.scene-night.lens-rayone-emv .optical-overlay{opacity:.08;background:radial-gradient(ellipse 8% 14% at 37% 40%,rgba(255,237,177,.22),transparent 72%),radial-gradient(ellipse 8% 14% at 64% 40%,rgba(255,237,177,.22),transparent 72%);mix-blend-mode:screen}
 .lens-profile{display:flex;align-items:center;gap:18px;padding:8px 14px 12px;color:#c1cbd2;min-height:48px}
 .profile-heading{font-size:9px;letter-spacing:.15em;font-weight:800;color:#85949f;white-space:nowrap}
@@ -90,7 +103,7 @@ body{padding:0 16px 18px}
   </div>
 </section>
 <section class="views" id="views" aria-live="polite">
-  <article class="view condition-cataracts" id="viewA"><div class="scene-art" id="sceneA"></div><div class="ghost-art" id="ghostA"></div><div class="optical-overlay"></div><div class="view-title"><span id="conditionNameA">Cataracts</span><button class="info" type="button" aria-label="About this condition" aria-expanded="false" data-tip="tipA">i</button></div><div class="tooltip" id="tipA" hidden>Cataract-like haze is shown as a simplified reduction in clarity and contrast. The effect is illustrative, not a clinical model.</div><div class="view-mark" id="markA">ILLUSTRATIVE VIEW</div></article>
+  <article class="view condition-cataracts" id="viewA"><div class="scene-art" id="sceneA"></div><div class="ghost-art" id="ghostA"></div><div class="optical-overlay"></div><div class="focus-overlay"></div><div class="view-title"><span id="conditionNameA">Cataracts</span><button class="info" type="button" aria-label="About this condition" aria-expanded="false" data-tip="tipA">i</button></div><div class="tooltip" id="tipA" hidden>Cataract-like haze is shown as a simplified reduction in clarity and contrast. The effect is illustrative, not a clinical model.</div><div class="view-mark" id="markA">ILLUSTRATIVE VIEW</div></article>
   <article class="view condition-cataracts hidden" id="viewB"><div class="scene-art" id="sceneB"></div><div class="ghost-art" id="ghostB"></div><div class="optical-overlay"></div><div class="view-title"><span id="conditionNameB">Cataracts</span><button class="info" type="button" aria-label="About this condition" aria-expanded="false" data-tip="tipB">i</button></div><div class="tooltip" id="tipB" hidden>Cataract-like haze is shown as a simplified reduction in clarity and contrast. The effect is illustrative, not a clinical model.</div><div class="view-mark" id="markB">COMPARISON VIEW</div></article>
 </section>
 <p style="margin:10px 3px 0;color:#8d9aa5;font-size:10px;line-height:1.45">Educational demonstration only. Visual effects are simplified approximations and do not predict an individual’s vision or surgical outcome. Lens choice should be discussed with a qualified eye-care professional.</p><p class="asset-credit">Video credits: Night Driving — “Cars Passing by at Night” by Maximilian Schönherr, Wikimedia Commons, CC BY-SA 4.0; Day Driving — “ROAD VIEW” by Niyati Sharma 1505, Wikimedia Commons, CC BY-SA 4.0; Outdoor — “Landscape of a Rocky Mountain” by Nico Becker, Pexels free-use license; Reading — “Person Reading a Book” by Anvar Tushakov, Pexels free-use license. All clips are looped and shown with simplified illustrative visual overlays. <a href="https://commons.wikimedia.org/wiki/File:Cars_Passing_by_at_Night.webm" target="_blank" rel="noopener" style="color:#a9c9d6">Night source</a> · <a href="https://commons.wikimedia.org/wiki/File:ROAD_VIEW.webm" target="_blank" rel="noopener" style="color:#a9c9d6">Day source</a> · <a href="https://www.pexels.com/video/person-reading-a-book-4750067/" target="_blank" rel="noopener" style="color:#a9c9d6">Reading source</a> · <a href="https://www.pexels.com/video/landscape-of-a-rocky-mountain-5701093/" target="_blank" rel="noopener" style="color:#a9c9d6">Outdoor source</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener" style="color:#a9c9d6">CC BY-SA 4.0</a> · <a href="https://www.pexels.com/license/" target="_blank" rel="noopener" style="color:#a9c9d6">Pexels license</a>.</p>
@@ -103,12 +116,24 @@ day:`<svg viewBox="0 0 1600 850" xmlns="http://www.w3.org/2000/svg" preserveAspe
 reading:`<svg viewBox="0 0 1600 850" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="room" x2="0" y2="1"><stop stop-color="#e9e4d8"/><stop offset="1" stop-color="#9b826b"/></linearGradient></defs><rect width="1600" height="850" fill="url(#room)"/><rect x="100" y="80" width="430" height="300" rx="6" fill="#9ebac0"/><path d="M100 330q120-110 220-20t210-15v85H100z" fill="#6f927d"/><rect x="0" y="575" width="1600" height="275" fill="#77583e"/><path d="M330 250q-35-25-18 30l105 365q11 35 45 24l420-126q34-10 22-43L800 130q-10-32-44-21z" fill="#f6f1e2" stroke="#a8a39a" stroke-width="10"/><path d="M805 130l265 530" stroke="#d2c9b5" stroke-width="9"/><g stroke="#9b9c95" stroke-width="8" opacity=".8"><path d="M440 335l270-83M470 390l270-83M500 445l270-83M530 500l270-83M560 555l270-83"/></g><rect x="1150" y="210" width="230" height="330" rx="18" fill="#455d66"/><rect x="1165" y="228" width="200" height="290" rx="10" fill="#b4d0c8"/><circle cx="1265" cy="365" r="54" fill="#e5d1a4"/></svg>`,
 outdoor:`<svg viewBox="0 0 1600 850" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="outSky" x2="0" y2="1"><stop stop-color="#7ec1da"/><stop offset="1" stop-color="#e2e6cb"/></linearGradient><linearGradient id="water" x2="0" y2="1"><stop stop-color="#8ac2c7"/><stop offset="1" stop-color="#3c7b86"/></linearGradient></defs><rect width="1600" height="850" fill="url(#outSky)"/><circle cx="1300" cy="135" r="58" fill="#fff0b7"/><path d="M0 510L210 230l210 260 250-340 230 330 210-270 220 290 170-180 100 190v340H0z" fill="#718b7e"/><path d="M670 150l250 330-80-42-45 35-60-49-50 33-50-43-44 12zM1110 210l220 290-74-31-52 24-51-42-40 30-47-32-41 11z" fill="#e6ece2"/><path d="M0 530q300-80 590 0t500 0 510 0v320H0z" fill="#79a079"/><path d="M0 650q320-50 640 0t960 0v200H0z" fill="url(#water)"/><path d="M0 700q260-30 520 0t520 0 560 0M0 770q260-30 520 0t520 0 560 0" stroke="#d8eeee" stroke-width="5" opacity=".4" fill="none"/></svg>`
 };
-const videoClip=(src,type,label,loopEnd)=>'<video class="scene-video" autoplay muted loop playsinline preload="metadata" aria-label="'+label+'"'+(loopEnd?' data-loop-end="'+loopEnd+'"':'')+'><source src="'+src+'" type="'+type+'"></video>';
+const videoClip=(sources,label)=>'<video class="scene-video" autoplay muted loop playsinline preload="metadata" aria-label="'+label+'">'+sources.map(([src,type])=>'<source src="'+src+'" type="'+type+'">').join("")+'</video>';
 const sceneClips={
-night:videoClip("https://upload.wikimedia.org/wikipedia/commons/f/fa/Cars_Passing_by_at_Night.webm","video/webm","Cars passing by at night"),
-day:videoClip("https://upload.wikimedia.org/wikipedia/commons/0/05/ROAD_VIEW.webm","video/webm","Daytime road trip through a mountain landscape"),
-reading:videoClip("https://videos.pexels.com/video-files/4750067/4750067-hd_1920_1080_30fps.mp4","video/mp4","Person reading a book and turning pages"),
-outdoor:videoClip("https://videos.pexels.com/video-files/5701093/5701093-uhd_4096_2304_25fps.mp4","video/mp4","Wide rocky mountain landscape")
+night:videoClip([
+["https://upload.wikimedia.org/wikipedia/commons/f/fa/Cars_Passing_by_at_Night.webm","video/webm"]
+],"Cars passing by at night"),
+day:videoClip([
+["https://videos.pexels.com/video-files/9109808/9109808-hd_1920_1080_30fps.mp4","video/mp4"],
+["https://videos.pexels.com/video-files/9109808/9109808-uhd_3840_2160_30fps.mp4","video/mp4"],
+["https://upload.wikimedia.org/wikipedia/commons/4/4e/ROAD_VIEW.webm","video/webm"]
+],"Daytime road driving"),
+reading:videoClip([
+["https://videos.pexels.com/video-files/4625318/4625318-hd_1920_1080_25fps.mp4","video/mp4"],
+["https://videos.pexels.com/video-files/4625318/4625318-uhd_3840_2160_25fps.mp4","video/mp4"]
+],"Close-up of a person reading a book"),
+outdoor:videoClip([
+["https://videos.pexels.com/video-files/6989136/6989136-hd_1920_1080_25fps.mp4","video/mp4"],
+["https://commons.wikimedia.org/wiki/Special:FilePath/Mountain_Landscape_near_Nathu_La_Pass,_Sikkim.webm","video/webm"]
+],"Mountain scenery in daylight")
 };
 const sceneMedia=scene=>sceneClips[scene]||scenes[scene];
 const names={cataracts:"Cataracts","cataracts-astigmatism":"Cataracts + Astigmatism",presbyopia:"Presbyopia","presbyopia-astigmatism":"Presbyopia + Astigmatism"};
@@ -151,8 +176,20 @@ function draw(target,condition,lens){
   if(hasPresbyopia&&hasAstig)classes.push("state-presbyopia-astig");
   if(lens)classes.push("lens-"+lens);
   view.className=classes.filter(Boolean).join(" ");
-  $("conditionName"+target).textContent=names[condition];
-  $("tip"+target).textContent=conditionInfo[condition];
+  const lensTitles={
+    monofocal:"Monofocal (Distance Focus)",
+    "rayone-emv":"RayOne EMV (Increased Range of Focus)",
+    trifocal:"Trifocal (Distance, Intermediate & Near)",
+    "rayone-galaxy":"RayOne Galaxy (Continuous Full Range)"
+  };
+  const lensInfo={
+    monofocal:"A standard monofocal IOL is set for one main focal distance. This demonstration assumes a distance target: road signs and distant cars stay clearer, while nearer dashboard detail is softened.",
+    "rayone-emv":"RayOne EMV is an enhanced, non-diffractive monofocal design that extends focus from distance toward intermediate. The demonstration keeps distant details clear and shows more dashboard/intermediate detail than the standard monofocal view. Actual results vary.",
+    trifocal:"A trifocal IOL distributes light across distance, intermediate and near focal points. This conceptual night scene may show more halo or glare than non-diffractive designs; actual symptoms vary.",
+    "rayone-galaxy":"RayOne Galaxy uses a non-diffractive spiral optic designed to provide a smooth, continuous range from distance to near, with minimized dysphotopsia. This visual overlay is only illustrative."
+  };
+  $("conditionName"+target).textContent=hasLens?lensTitles[lens]:names[condition];
+  $("tip"+target).textContent=hasLens?lensInfo[lens]:conditionInfo[condition];
   const label=hasLens?lensProfiles[lens].name+" · POST-IOL ILLUSTRATION":"CONDITION VIEW · SELECT AN IOL";
   $("mark"+target).textContent=target==="B"?(hasLens?label:"SELECT COMPARISON IOL"):label;
 }
