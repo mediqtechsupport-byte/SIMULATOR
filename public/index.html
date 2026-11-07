@@ -30,20 +30,33 @@ body{padding:0 16px 18px}
 .views{display:grid;grid-template-columns:1fr;gap:9px}
 .views.comparing{grid-template-columns:1fr 1fr}
 .view{min-width:0;position:relative;overflow:hidden;border-radius:5px;background:#1c2b35;aspect-ratio:16/7.2;min-height:390px;max-height:calc(100vh - 122px)}
-.scene-art{position:absolute;inset:0;width:100%;height:100%;display:block;transition:filter .24s ease;transform:scale(1.005)}
-.view.condition-cataracts .scene-art{filter:blur(2px) sepia(.42) brightness(1.2) contrast(.74) saturate(.72)}
-.view.condition-cataracts-astigmatism .scene-art{filter:blur(2.8px) sepia(.3) brightness(1.12) contrast(.78) saturate(.76)}
-.view.condition-presbyopia .scene-art{filter:blur(3.4px) brightness(1.02) contrast(.88)}
-.view.condition-presbyopia-astigmatism .scene-art{filter:blur(4px) brightness(1.02) contrast(.82)}
-.view.condition-cataracts:after,.view.condition-cataracts-astigmatism:after{content:"";position:absolute;inset:0;pointer-events:none;background:rgba(225,177,105,.28);mix-blend-mode:screen}
-.view.condition-cataracts-astigmatism:before,.view.condition-presbyopia-astigmatism:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 35%,rgba(232,244,255,.12) 48%,transparent 62%);mix-blend-mode:screen;z-index:1}
-.view.lens-trifocal .scene-art{filter:contrast(1.02) saturate(.94)}
-.view.lens-rayone-emv .scene-art{filter:contrast(1.04) brightness(1.01)}
-.view.lens-rayone-galaxy .scene-art{filter:contrast(1.02) saturate(1.03)}
-.view.condition-cataracts.lens-trifocal .scene-art,.view.condition-cataracts.lens-rayone-emv .scene-art,.view.condition-cataracts.lens-rayone-galaxy .scene-art{filter:blur(2px) sepia(.42) brightness(1.2) contrast(.74) saturate(.72)}
-.view.condition-cataracts-astigmatism.lens-trifocal .scene-art,.view.condition-cataracts-astigmatism.lens-rayone-emv .scene-art,.view.condition-cataracts-astigmatism.lens-rayone-galaxy .scene-art{filter:blur(2.8px) sepia(.3) brightness(1.12) contrast(.78) saturate(.76)}
-.view.condition-presbyopia.lens-trifocal .scene-art,.view.condition-presbyopia.lens-rayone-emv .scene-art,.view.condition-presbyopia.lens-rayone-galaxy .scene-art{filter:blur(3.4px) brightness(1.02) contrast(.88)}
-.view.condition-presbyopia-astigmatism.lens-trifocal .scene-art,.view.condition-presbyopia-astigmatism.lens-rayone-emv .scene-art,.view.condition-presbyopia-astigmatism.lens-rayone-galaxy .scene-art{filter:blur(4px) brightness(1.02) contrast(.82)}
+.scene-art,.ghost-art{position:absolute;inset:0;width:100%;height:100%;display:block;transition:filter .24s ease,opacity .24s ease;transform:scale(1.005)}
+.ghost-art{display:none;opacity:.2;mix-blend-mode:screen;transform:translate(4px,-2px) scale(1.005);pointer-events:none}
+.optical-overlay{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;transition:opacity .24s ease}
+.view.pre-iol.state-cataracts .scene-art{filter:blur(2.7px) sepia(.24) brightness(1.06) contrast(.68) saturate(.72)}
+.view.pre-iol.state-cataracts .optical-overlay{opacity:1;background:radial-gradient(ellipse at 50% 45%,rgba(247,219,166,.13),rgba(224,177,105,.23) 70%),linear-gradient(110deg,rgba(245,202,133,.10),rgba(255,244,213,.22),rgba(245,202,133,.10));mix-blend-mode:screen}
+.view.state-astig .ghost-art{display:block;filter:blur(1.4px)}
+.view.pre-iol.state-astig .ghost-art{opacity:.32}
+.view.post-iol.state-astig .ghost-art{opacity:.18}
+.view.pre-iol.state-presbyopia.scene-reading .scene-art{filter:blur(4.2px) brightness(1.03) contrast(.9)}
+.view.pre-iol.state-presbyopia-astig.scene-reading .scene-art{filter:blur(4.4px) brightness(1.02) contrast(.88)}
+.view.post-iol.scene-reading.lens-monofocal .scene-art{filter:blur(4.4px) brightness(1.02)}
+.view.post-iol.scene-reading.lens-rayone-emv .scene-art{filter:blur(2.6px) brightness(1.02)}
+.view.post-iol.scene-reading.lens-trifocal .scene-art,.view.post-iol.scene-reading.lens-rayone-galaxy .scene-art{filter:none}
+.view.post-iol.scene-night.lens-trifocal .optical-overlay{opacity:.78;background:radial-gradient(ellipse 13% 24% at 37% 40%,rgba(255,237,177,.50),transparent 72%),radial-gradient(ellipse 15% 26% at 64% 40%,rgba(255,237,177,.48),transparent 72%);mix-blend-mode:screen}
+.view.post-iol.scene-night.lens-rayone-galaxy .optical-overlay{opacity:.26;background:radial-gradient(ellipse 9% 16% at 37% 40%,rgba(255,237,177,.32),transparent 72%),radial-gradient(ellipse 10% 17% at 64% 40%,rgba(255,237,177,.30),transparent 72%);mix-blend-mode:screen}
+.view.post-iol.scene-night.lens-rayone-emv .optical-overlay{opacity:.08;background:radial-gradient(ellipse 8% 14% at 37% 40%,rgba(255,237,177,.22),transparent 72%),radial-gradient(ellipse 8% 14% at 64% 40%,rgba(255,237,177,.22),transparent 72%);mix-blend-mode:screen}
+.lens-profile{display:flex;align-items:center;gap:18px;padding:8px 14px 12px;color:#c1cbd2;min-height:48px}
+.profile-heading{font-size:9px;letter-spacing:.15em;font-weight:800;color:#85949f;white-space:nowrap}
+.profile-list{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
+.profile-item{display:flex;align-items:center;gap:9px;min-width:0}
+.profile-item+.profile-item{border-left:1px solid #34424b;padding-left:14px}
+.profile-name{font-size:11px;font-weight:700;color:#edf2f5;white-space:nowrap}
+.profile-desc{font-size:10px;color:#9eabb4;line-height:1.35}
+.focus-chips{display:flex;gap:4px;flex-wrap:wrap}
+.focus-chip{padding:3px 6px;border-radius:3px;background:#263640;color:#a9d0de;font-size:8px;font-weight:800;letter-spacing:.06em;white-space:nowrap}
+.focus-chip.off{color:#657580;background:#1b2932}
+.profile-empty{font-size:10px;color:#8797a2}
 .view-title{position:absolute;z-index:3;top:24px;left:30px;display:flex;align-items:center;gap:12px;font-size:20px;font-weight:700;text-shadow:0 1px 5px #0005}
 .info{width:25px;height:25px;display:inline-grid;place-items:center;border:2px solid #fff;border-radius:50%;background:#10182035;color:white;font-size:15px;font-weight:700;cursor:pointer}
 .info:focus-visible{outline:2px solid white;outline-offset:3px}
@@ -64,9 +77,16 @@ body{padding:0 16px 18px}
   <div class="compare-control"><label class="compare-label" for="compare">Compare</label><label class="switch"><input id="compare" type="checkbox"><span class="switch-track"></span></label></div>
   <div class="control"><label for="lensB">Comparison Lens (IOL)</label><select id="lensB" disabled><option value="" selected>Select Lens</option><option value="monofocal">Monofocal</option><option value="rayone-emv">RayOne EMV</option><option value="trifocal">Trifocal</option><option value="rayone-galaxy">RayOne Galaxy</option></select></div>
 </section>
+<section class="lens-profile" id="lensProfile" aria-live="polite">
+  <span class="profile-heading">LENS BEHAVIOUR</span>
+  <div class="profile-list">
+    <div class="profile-item" id="profileA"><strong class="profile-name" id="profileNameA">Select an IOL to preview its focus range</strong><div class="focus-chips" id="focusA"></div><span class="profile-desc" id="profileDescA"></span></div>
+    <div class="profile-item hidden" id="profileB"><strong class="profile-name" id="profileNameB"></strong><div class="focus-chips" id="focusB"></div><span class="profile-desc" id="profileDescB"></span></div>
+  </div>
+</section>
 <section class="views" id="views" aria-live="polite">
-  <article class="view condition-cataracts" id="viewA"><div class="scene-art" id="sceneA"></div><div class="view-title"><span id="conditionNameA">Cataracts</span><button class="info" type="button" aria-label="About this condition" aria-expanded="false" data-tip="tipA">i</button></div><div class="tooltip" id="tipA" hidden>Cataract-like haze is shown as a simplified reduction in clarity and contrast. The effect is illustrative, not a clinical model.</div><div class="view-mark" id="markA">ILLUSTRATIVE VIEW</div></article>
-  <article class="view condition-cataracts hidden" id="viewB"><div class="scene-art" id="sceneB"></div><div class="view-title"><span id="conditionNameB">Cataracts</span><button class="info" type="button" aria-label="About this condition" aria-expanded="false" data-tip="tipB">i</button></div><div class="tooltip" id="tipB" hidden>Cataract-like haze is shown as a simplified reduction in clarity and contrast. The effect is illustrative, not a clinical model.</div><div class="view-mark" id="markB">COMPARISON VIEW</div></article>
+  <article class="view condition-cataracts" id="viewA"><div class="scene-art" id="sceneA"></div><div class="ghost-art" id="ghostA"></div><div class="optical-overlay"></div><div class="view-title"><span id="conditionNameA">Cataracts</span><button class="info" type="button" aria-label="About this condition" aria-expanded="false" data-tip="tipA">i</button></div><div class="tooltip" id="tipA" hidden>Cataract-like haze is shown as a simplified reduction in clarity and contrast. The effect is illustrative, not a clinical model.</div><div class="view-mark" id="markA">ILLUSTRATIVE VIEW</div></article>
+  <article class="view condition-cataracts hidden" id="viewB"><div class="scene-art" id="sceneB"></div><div class="ghost-art" id="ghostB"></div><div class="optical-overlay"></div><div class="view-title"><span id="conditionNameB">Cataracts</span><button class="info" type="button" aria-label="About this condition" aria-expanded="false" data-tip="tipB">i</button></div><div class="tooltip" id="tipB" hidden>Cataract-like haze is shown as a simplified reduction in clarity and contrast. The effect is illustrative, not a clinical model.</div><div class="view-mark" id="markB">COMPARISON VIEW</div></article>
 </section>
 <p style="margin:10px 3px 0;color:#8d9aa5;font-size:10px;line-height:1.45">Educational demonstration only. Visual effects are simplified approximations and do not predict an individual’s vision or surgical outcome. Lens choice should be discussed with a qualified eye-care professional.</p>
 </main>
@@ -79,15 +99,53 @@ reading:`<svg viewBox="0 0 1600 850" xmlns="http://www.w3.org/2000/svg" preserve
 outdoor:`<svg viewBox="0 0 1600 850" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="outSky" x2="0" y2="1"><stop stop-color="#7ec1da"/><stop offset="1" stop-color="#e2e6cb"/></linearGradient><linearGradient id="water" x2="0" y2="1"><stop stop-color="#8ac2c7"/><stop offset="1" stop-color="#3c7b86"/></linearGradient></defs><rect width="1600" height="850" fill="url(#outSky)"/><circle cx="1300" cy="135" r="58" fill="#fff0b7"/><path d="M0 510L210 230l210 260 250-340 230 330 210-270 220 290 170-180 100 190v340H0z" fill="#718b7e"/><path d="M670 150l250 330-80-42-45 35-60-49-50 33-50-43-44 12zM1110 210l220 290-74-31-52 24-51-42-40 30-47-32-41 11z" fill="#e6ece2"/><path d="M0 530q300-80 590 0t500 0 510 0v320H0z" fill="#79a079"/><path d="M0 650q320-50 640 0t960 0v200H0z" fill="url(#water)"/><path d="M0 700q260-30 520 0t520 0 560 0M0 770q260-30 520 0t520 0 560 0" stroke="#d8eeee" stroke-width="5" opacity=".4" fill="none"/></svg>`
 };
 const names={cataracts:"Cataracts","cataracts-astigmatism":"Cataracts + Astigmatism",presbyopia:"Presbyopia","presbyopia-astigmatism":"Presbyopia + Astigmatism"};
-const info={
-cataracts:"A cataract can make vision appear cloudy, hazy, or less contrast-rich. This screen applies a simplified visual effect for demonstration only.",
-"cataracts-astigmatism":"This combines a cataract-like haze with a simplified directional blur. It is not a clinical representation of an individual eye.",
-presbyopia:"Presbyopia is an age-related difficulty focusing up close. This screen uses a simplified blur effect to illustrate the concept.",
-"presbyopia-astigmatism":"This combines simplified near-focus blur and directional softness. Real symptoms vary between individuals."
+const conditionInfo={
+cataracts:"Cataracts cloud the natural lens. Before an IOL is chosen, this view shows haze, softer detail, reduced contrast and extra light scatter. Cataract surgery removes the cloudy natural lens; the post-IOL preview therefore clears this haze.",
+"cataracts-astigmatism":"This combines cataract-like haze with astigmatic blur. After cataract removal, the haze is cleared in this preview, but astigmatism can remain unless it is also treated or an appropriate toric IOL is selected.",
+presbyopia:"Presbyopia reduces the eye's ability to focus up close. This preset mainly affects the Reading scene; distance scenes stay comparatively clear. The selected IOL profile changes how near focus is illustrated.",
+"presbyopia-astigmatism":"This combines near-focus difficulty with astigmatic distortion. The reading scene shows near blur; astigmatic ghosting can affect both near and far scenes. Astigmatism correction depends on the treatment plan and any toric lens used."
 };
-function draw(target,condition,lens){const scene=$("scene").value,view=$("view"+target);$("scene"+target).innerHTML=scenes[scene];view.className="view condition-"+condition+" lens-"+lens;$("conditionName"+target).textContent=names[condition];$("tip"+target).textContent=info[condition];$("mark"+target).textContent=target==="B"?"COMPARISON VIEW":(lens?lens.toUpperCase().replaceAll("-"," ")+" · ILLUSTRATIVE VIEW":"ILLUSTRATIVE VIEW")}
-function update(){const condition=$("condition").value,lensA=$("lensA").value,lensB=$("lensB").value,compare=$("compare").checked;$("lensB").disabled=!compare;$("views").classList.toggle("comparing",compare);$("viewB").classList.toggle("hidden",!compare);draw("A",condition,lensA||"unselected");if(compare)draw("B",condition,lensB||"unselected")}
-["scene","condition","lensA","lensB"].forEach(id=>$(id).addEventListener("change",update));$("compare").addEventListener("change",update);document.querySelectorAll(".info").forEach(button=>button.addEventListener("click",()=>{const tip=$(button.dataset.tip),open=tip.hidden;document.querySelectorAll(".tooltip").forEach(t=>t.hidden=true);document.querySelectorAll(".info").forEach(b=>b.setAttribute("aria-expanded","false"));tip.hidden=!open;button.setAttribute("aria-expanded",String(open))}));document.addEventListener("click",e=>{if(!e.target.closest(".info")&&!e.target.closest(".tooltip")){document.querySelectorAll(".tooltip").forEach(t=>t.hidden=true);document.querySelectorAll(".info").forEach(b=>b.setAttribute("aria-expanded","false"))}});update();
+const lensProfiles={
+monofocal:{name:"Monofocal",focus:["DISTANCE"],description:"One focal distance. This demo assumes a distance-targeted lens, so reading may remain soft; near glasses are commonly needed.",near:"blur"},
+"rayone-emv":{name:"RayOne EMV",focus:["DISTANCE","INTERMEDIATE"],description:"Enhanced, non-diffractive monofocal design that extends focus from distance toward intermediate. Near reading may still need extra correction.",near:"soft"},
+trifocal:{name:"Trifocal",focus:["DISTANCE","INTERMEDIATE","NEAR"],description:"Three focal points share incoming light. The night preview adds a subtle possible halo effect; real visual symptoms vary.",near:"clear"},
+"rayone-galaxy":{name:"RayOne Galaxy",focus:["DISTANCE","INTERMEDIATE","NEAR","CONTINUOUS"],description:"Non-diffractive spiral optic designed for a smooth, continuous full range of focus. The night preview uses a softer halo illustration.",near:"clear"}
+};
+const astigmatismKey=key=>key.includes("astigmatism");
+const cataractKey=key=>key.includes("cataracts");
+const presbyopiaKey=key=>key.includes("presbyopia");
+function setProfile(target,key){
+  const box=$("profile"+target),name=$("profileName"+target),chips=$("focus"+target),desc=$("profileDesc"+target),profile=key?lensProfiles[key]:null;
+  if(!profile){box.classList.toggle("hidden",target==="B"||!$("compare").checked);name.textContent=target==="B"?"Choose a comparison IOL":"Select an IOL to preview its focus range";chips.innerHTML="";desc.textContent="";return}
+  box.classList.remove("hidden");name.textContent=profile.name;
+  chips.innerHTML=profile.focus.map(x=>'<span class="focus-chip">'+x+'</span>').join("");
+  desc.textContent=profile.description;
+}
+function draw(target,condition,lens){
+  const scene=$("scene").value,view=$("view"+target),hasLens=Boolean(lens),hasCataract=cataractKey(condition),hasAstig=astigmatismKey(condition),hasPresbyopia=presbyopiaKey(condition);
+  $("scene"+target).innerHTML=scenes[scene];$("ghost"+target).innerHTML=scenes[scene];
+  const classes=["view","scene-"+scene,hasLens?"post-iol":"pre-iol",hasCataract?"state-cataracts":"",hasAstig?"state-astig":"",hasPresbyopia?"state-presbyopia":""];
+  if(hasPresbyopia&&hasAstig)classes.push("state-presbyopia-astig");
+  if(lens)classes.push("lens-"+lens);
+  view.className=classes.filter(Boolean).join(" ");
+  $("conditionName"+target).textContent=names[condition];
+  $("tip"+target).textContent=conditionInfo[condition];
+  const label=hasLens?lensProfiles[lens].name+" · POST-IOL ILLUSTRATION":"CONDITION VIEW · SELECT AN IOL";
+  $("mark"+target).textContent=target==="B"?(hasLens?label:"SELECT COMPARISON IOL"):label;
+}
+function update(){
+  const condition=$("condition").value,lensA=$("lensA").value,lensB=$("lensB").value,compare=$("compare").checked;
+  $("lensB").disabled=!compare;$("views").classList.toggle("comparing",compare);$("viewB").classList.toggle("hidden",!compare);
+  $("profileB").classList.toggle("hidden",!compare||!lensB);
+  draw("A",condition,lensA);if(compare)draw("B",condition,lensB);
+  setProfile("A",lensA);setProfile("B",compare?lensB:null);
+  $("profileB").classList.toggle("hidden",!compare||!lensB);
+}
+["scene","condition","lensA","lensB"].forEach(id=>$(id).addEventListener("change",update));
+$("compare").addEventListener("change",update);
+document.querySelectorAll(".info").forEach(button=>button.addEventListener("click",()=>{const tip=$(button.dataset.tip),open=tip.hidden;document.querySelectorAll(".tooltip").forEach(t=>t.hidden=true);document.querySelectorAll(".info").forEach(b=>b.setAttribute("aria-expanded","false"));tip.hidden=!open;button.setAttribute("aria-expanded",String(open))}));
+document.addEventListener("click",e=>{if(!e.target.closest(".info")&&!e.target.closest(".tooltip")){document.querySelectorAll(".tooltip").forEach(t=>t.hidden=true);document.querySelectorAll(".info").forEach(b=>b.setAttribute("aria-expanded","false"))}});
+update();
 </script>
 </body>
 </html>
