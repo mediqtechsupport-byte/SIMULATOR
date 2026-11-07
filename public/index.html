@@ -844,6 +844,50 @@ body.settings-hidden .controls,body.settings-hidden .lens-profile{display:none!i
 .view.post-iol.state-cataracts .scene-art{filter:none!important}
 .view.post-iol.state-cataracts:not(.state-astig) .optical-overlay{opacity:0!important}
 
+
+/* PRESBYOPIA CLEANUP: use a broad, feathered near-task area rather than a thin
+   horizontal/diagonal strip. The blur stays over the menu/phone on the table. */
+.view.state-presbyopia.scene-reading .focus-overlay,
+.view.state-presbyopia-astig.scene-reading .focus-overlay{
+  inset:73% 34% 2% 34%!important;
+  border-radius:50%!important;
+  -webkit-mask-image:radial-gradient(ellipse at center, #000 38%, rgba(0,0,0,.82) 58%, transparent 100%)!important;
+  mask-image:radial-gradient(ellipse at center, #000 38%, rgba(0,0,0,.82) 58%, transparent 100%)!important;
+  background:rgba(238,231,213,.035)!important;
+}
+.view.pre-iol.state-presbyopia.scene-reading .focus-overlay,
+.view.pre-iol.state-presbyopia-astig.scene-reading .focus-overlay,
+.view.post-iol.state-presbyopia.scene-reading.lens-monofocal .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-monofocal .focus-overlay{
+  opacity:1!important;
+  -webkit-backdrop-filter:blur(7.5px) saturate(.76)!important;
+  backdrop-filter:blur(7.5px) saturate(.76)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-rayone-emv .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-rayone-emv .focus-overlay{
+  opacity:.94!important;
+  -webkit-backdrop-filter:blur(3.4px) saturate(.9)!important;
+  backdrop-filter:blur(3.4px) saturate(.9)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-trifocal .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-trifocal .focus-overlay{
+  opacity:.12!important;
+  -webkit-backdrop-filter:blur(.5px)!important;
+  backdrop-filter:blur(.5px)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-rayone-galaxy .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-rayone-galaxy .focus-overlay{
+  opacity:0!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+/* Avoid the old narrow glow stripe in the coffeehouse scene; lens differences
+   are represented by the localized near-focus blur instead. */
+.view.post-iol.scene-reading .optical-overlay{
+  opacity:0!important;
+  background:none!important;
+}
+
 </style>
 </head>
 <body>
