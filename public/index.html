@@ -32,6 +32,11 @@ body{padding:0 16px 18px}
 .view{min-width:0;position:relative;overflow:hidden;border-radius:5px;background:#1c2b35;aspect-ratio:16/7.2;min-height:390px;max-height:calc(100vh - 122px)}
 .scene-art,.ghost-art{position:absolute;inset:0;width:100%;height:100%;display:block;transition:filter .24s ease,opacity .24s ease;transform:scale(1.005)}
 .ghost-art{display:none;opacity:.2;mix-blend-mode:screen;transform:translate(4px,-2px) scale(1.005);pointer-events:none}
+.scene-art video,.ghost-art video{width:100%;height:100%;display:block;object-fit:cover}
+.scene-video{width:100%;height:100%;object-fit:cover;display:block}
+.asset-credit{margin:5px 3px 0;color:#84929c;font-size:9px;line-height:1.45}
+@media(prefers-reduced-motion:reduce){.scene-video{animation:none}}
+
 .optical-overlay{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;transition:opacity .24s ease}
 .view.pre-iol.state-cataracts .scene-art{filter:blur(2.7px) sepia(.24) brightness(1.06) contrast(.68) saturate(.72)}
 .view.pre-iol.state-cataracts .optical-overlay{opacity:1;background:radial-gradient(ellipse at 50% 45%,rgba(247,219,166,.13),rgba(224,177,105,.23) 70%),linear-gradient(110deg,rgba(245,202,133,.10),rgba(255,244,213,.22),rgba(245,202,133,.10));mix-blend-mode:screen}
@@ -88,7 +93,7 @@ body{padding:0 16px 18px}
   <article class="view condition-cataracts" id="viewA"><div class="scene-art" id="sceneA"></div><div class="ghost-art" id="ghostA"></div><div class="optical-overlay"></div><div class="view-title"><span id="conditionNameA">Cataracts</span><button class="info" type="button" aria-label="About this condition" aria-expanded="false" data-tip="tipA">i</button></div><div class="tooltip" id="tipA" hidden>Cataract-like haze is shown as a simplified reduction in clarity and contrast. The effect is illustrative, not a clinical model.</div><div class="view-mark" id="markA">ILLUSTRATIVE VIEW</div></article>
   <article class="view condition-cataracts hidden" id="viewB"><div class="scene-art" id="sceneB"></div><div class="ghost-art" id="ghostB"></div><div class="optical-overlay"></div><div class="view-title"><span id="conditionNameB">Cataracts</span><button class="info" type="button" aria-label="About this condition" aria-expanded="false" data-tip="tipB">i</button></div><div class="tooltip" id="tipB" hidden>Cataract-like haze is shown as a simplified reduction in clarity and contrast. The effect is illustrative, not a clinical model.</div><div class="view-mark" id="markB">COMPARISON VIEW</div></article>
 </section>
-<p style="margin:10px 3px 0;color:#8d9aa5;font-size:10px;line-height:1.45">Educational demonstration only. Visual effects are simplified approximations and do not predict an individual’s vision or surgical outcome. Lens choice should be discussed with a qualified eye-care professional.</p>
+<p style="margin:10px 3px 0;color:#8d9aa5;font-size:10px;line-height:1.45">Educational demonstration only. Visual effects are simplified approximations and do not predict an individual’s vision or surgical outcome. Lens choice should be discussed with a qualified eye-care professional.</p><p class="asset-credit">Night-driving footage: “Cars Passing by at Night” by Maximilian Schönherr, Wikimedia Commons, CC BY-SA 4.0. The clip is looped and displayed with illustrative visual overlays. <a href="https://commons.wikimedia.org/wiki/File:Cars_Passing_by_at_Night.webm" target="_blank" rel="noopener" style="color:#a9c9d6">Source and license</a>.</p>
 </main>
 <script>
 const $=id=>document.getElementById(id);
@@ -98,6 +103,8 @@ day:`<svg viewBox="0 0 1600 850" xmlns="http://www.w3.org/2000/svg" preserveAspe
 reading:`<svg viewBox="0 0 1600 850" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="room" x2="0" y2="1"><stop stop-color="#e9e4d8"/><stop offset="1" stop-color="#9b826b"/></linearGradient></defs><rect width="1600" height="850" fill="url(#room)"/><rect x="100" y="80" width="430" height="300" rx="6" fill="#9ebac0"/><path d="M100 330q120-110 220-20t210-15v85H100z" fill="#6f927d"/><rect x="0" y="575" width="1600" height="275" fill="#77583e"/><path d="M330 250q-35-25-18 30l105 365q11 35 45 24l420-126q34-10 22-43L800 130q-10-32-44-21z" fill="#f6f1e2" stroke="#a8a39a" stroke-width="10"/><path d="M805 130l265 530" stroke="#d2c9b5" stroke-width="9"/><g stroke="#9b9c95" stroke-width="8" opacity=".8"><path d="M440 335l270-83M470 390l270-83M500 445l270-83M530 500l270-83M560 555l270-83"/></g><rect x="1150" y="210" width="230" height="330" rx="18" fill="#455d66"/><rect x="1165" y="228" width="200" height="290" rx="10" fill="#b4d0c8"/><circle cx="1265" cy="365" r="54" fill="#e5d1a4"/></svg>`,
 outdoor:`<svg viewBox="0 0 1600 850" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="outSky" x2="0" y2="1"><stop stop-color="#7ec1da"/><stop offset="1" stop-color="#e2e6cb"/></linearGradient><linearGradient id="water" x2="0" y2="1"><stop stop-color="#8ac2c7"/><stop offset="1" stop-color="#3c7b86"/></linearGradient></defs><rect width="1600" height="850" fill="url(#outSky)"/><circle cx="1300" cy="135" r="58" fill="#fff0b7"/><path d="M0 510L210 230l210 260 250-340 230 330 210-270 220 290 170-180 100 190v340H0z" fill="#718b7e"/><path d="M670 150l250 330-80-42-45 35-60-49-50 33-50-43-44 12zM1110 210l220 290-74-31-52 24-51-42-40 30-47-32-41 11z" fill="#e6ece2"/><path d="M0 530q300-80 590 0t500 0 510 0v320H0z" fill="#79a079"/><path d="M0 650q320-50 640 0t960 0v200H0z" fill="url(#water)"/><path d="M0 700q260-30 520 0t520 0 560 0M0 770q260-30 520 0t520 0 560 0" stroke="#d8eeee" stroke-width="5" opacity=".4" fill="none"/></svg>`
 };
+const nightClip='<video class="scene-video" autoplay muted loop playsinline preload="metadata" aria-label="Cars passing by at night"><source src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Cars_Passing_by_at_Night.webm" type="video/webm"></video>';
+const sceneMedia=scene=>scene==="night"?nightClip:scenes[scene];
 const names={cataracts:"Cataracts","cataracts-astigmatism":"Cataracts + Astigmatism",presbyopia:"Presbyopia","presbyopia-astigmatism":"Presbyopia + Astigmatism"};
 const conditionInfo={
 cataracts:"A cataract clouds the natural lens. Before an IOL is chosen, this view shows overall haze, softened details, lower contrast and extra light scatter (especially noticeable around night lights). Cataract surgery removes the cloudy natural lens; the post-IOL preview therefore clears this haze.",
@@ -123,7 +130,7 @@ function setProfile(target,key){
 }
 function draw(target,condition,lens){
   const scene=$("scene").value,view=$("view"+target),hasLens=Boolean(lens),hasCataract=cataractKey(condition),hasAstig=astigmatismKey(condition),hasPresbyopia=presbyopiaKey(condition);
-  $("scene"+target).innerHTML=scenes[scene];$("ghost"+target).innerHTML=scenes[scene];
+  $("scene"+target).innerHTML=sceneMedia(scene);$("ghost"+target).innerHTML=sceneMedia(scene);
   const classes=["view","scene-"+scene,hasLens?"post-iol":"pre-iol",hasCataract?"state-cataracts":"",hasAstig?"state-astig":"",hasPresbyopia?"state-presbyopia":""];
   if(hasPresbyopia&&hasAstig)classes.push("state-presbyopia-astig");
   if(lens)classes.push("lens-"+lens);
