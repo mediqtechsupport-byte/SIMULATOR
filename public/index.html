@@ -782,6 +782,68 @@ body.settings-hidden .controls,body.settings-hidden .lens-profile{display:none!i
   opacity:0!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
 }
 
+
+/* LENS x CONDITION MATRIX — final precedence layer.
+   Focus changes are local to the near task; distance scenes are not globally blurred. */
+.view.pre-iol .focus-overlay{opacity:0!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.view.state-presbyopia.scene-reading .focus-overlay{
+  inset:70% 36% 3% 36%!important;border-radius:10px!important;
+  mask-image:linear-gradient(110deg,transparent 0%,black 15%,black 85%,transparent 100%)!important;
+  -webkit-mask-image:linear-gradient(110deg,transparent 0%,black 15%,black 85%,transparent 100%)!important;
+  background:rgba(238,231,213,.08)!important;
+}
+.view.pre-iol.state-presbyopia.scene-reading .focus-overlay,
+.view.pre-iol.state-presbyopia-astig.scene-reading .focus-overlay,
+.view.post-iol.state-presbyopia.scene-reading.lens-monofocal .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-monofocal .focus-overlay{
+  opacity:1!important;backdrop-filter:blur(7px) saturate(.76)!important;-webkit-backdrop-filter:blur(7px) saturate(.76)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-rayone-emv .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-rayone-emv .focus-overlay{
+  opacity:.92!important;backdrop-filter:blur(3.2px) saturate(.9)!important;-webkit-backdrop-filter:blur(3.2px) saturate(.9)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-trifocal .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-trifocal .focus-overlay{
+  opacity:.13!important;backdrop-filter:blur(.45px)!important;-webkit-backdrop-filter:blur(.45px)!important;background:rgba(255,239,204,.12)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-rayone-galaxy .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-rayone-galaxy .focus-overlay{
+  opacity:0!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+.view.post-iol.scene-reading.lens-trifocal .optical-overlay{
+  opacity:.48!important;
+  background:radial-gradient(ellipse 10% 5% at 50% 78%,transparent 0 42%,rgba(255,226,165,.22) 49%,transparent 68%),radial-gradient(ellipse 15% 8% at 50% 78%,rgba(255,240,205,.10),transparent 82%)!important;
+  mix-blend-mode:screen!important;
+}
+.view.post-iol.scene-reading.lens-rayone-galaxy .optical-overlay{
+  opacity:.36!important;background:radial-gradient(ellipse 18% 9% at 50% 78%,rgba(255,238,202,.22),transparent 84%)!important;mix-blend-mode:screen!important;
+}
+.view.post-iol.scene-night.lens-monofocal .optical-overlay,
+.view.post-iol.scene-outdoor.lens-monofocal .optical-overlay{opacity:0!important}
+.view.post-iol.scene-night.lens-rayone-emv .optical-overlay,
+.view.post-iol.scene-outdoor.lens-rayone-emv .optical-overlay{
+  opacity:.18!important;
+  background:radial-gradient(ellipse 5% 7% at 38% 37%,rgba(255,244,205,.22),transparent 82%),radial-gradient(ellipse 6% 7% at 63% 37%,rgba(255,244,205,.18),transparent 82%)!important;
+  mix-blend-mode:screen!important;
+}
+.view.post-iol.scene-night.lens-trifocal .optical-overlay,
+.view.post-iol.scene-outdoor.lens-trifocal .optical-overlay{
+  opacity:.72!important;
+  background:
+    radial-gradient(circle at 38% 37%,transparent 0 1.2%,rgba(255,231,169,.24) 1.45% 1.7%,transparent 1.95% 2.6%,rgba(255,231,169,.12) 2.85% 3.1%,transparent 3.4%),
+    radial-gradient(circle at 63% 37%,transparent 0 1.2%,rgba(255,231,169,.22) 1.45% 1.7%,transparent 1.95% 2.6%,rgba(255,231,169,.11) 2.85% 3.1%,transparent 3.4%),
+    radial-gradient(ellipse 9% 7% at 38% 37%,rgba(255,247,219,.20),transparent 82%),radial-gradient(ellipse 9% 7% at 63% 37%,rgba(255,247,219,.18),transparent 82%)!important;
+  mix-blend-mode:screen!important;
+}
+.view.post-iol.scene-night.lens-rayone-galaxy .optical-overlay,
+.view.post-iol.scene-outdoor.lens-rayone-galaxy .optical-overlay{
+  opacity:.44!important;
+  background:radial-gradient(ellipse 12% 10% at 38% 37%,rgba(255,244,205,.32),transparent 84%),radial-gradient(ellipse 13% 11% at 63% 37%,rgba(255,244,205,.28),transparent 84%)!important;
+  mix-blend-mode:screen!important;
+}
+.view.post-iol.state-cataracts .scene-art{filter:none!important}
+.view.post-iol.state-cataracts:not(.state-astig) .optical-overlay{opacity:0!important}
+
 </style>
 </head>
 <body>
@@ -842,10 +904,10 @@ presbyopia:"Presbyopia is the age-related loss of near focusing ability. In this
 "presbyopia-astigmatism":"This combines near-focus difficulty with astigmatic distortion. In Coffeehouse Conversation, nearby menu or phone details become blurry while the person across the table remains clearer. In Night Driving and Outdoor, presbyopia does not blur distant scenery, but astigmatism remains visible as directional softness and light ghosting. The selected IOL changes the close-up focus preview; astigmatism correction still depends on the treatment plan and an appropriate toric option where indicated."
 };
 const lensProfiles={
-monofocal:{name:"Monofocal",focus:["DISTANCE"],description:"One focal distance. This demo assumes a distance-targeted lens, so reading may remain soft; near glasses are commonly needed.",near:"blur"},
-"rayone-emv":{name:"RayOne EMV",focus:["DISTANCE","INTERMEDIATE"],description:"Enhanced, non-diffractive monofocal design that extends focus from distance toward intermediate (Rayner reports up to 1.5 D). Near reading may still need extra correction.",near:"soft"},
-trifocal:{name:"Trifocal",focus:["DISTANCE","INTERMEDIATE","NEAR"],description:"A diffractive design distributes light across distance, intermediate and near focal points. The night preview illustrates possible halos or glare; real symptoms vary.",near:"clear"},
-"rayone-galaxy":{name:"RayOne Galaxy",focus:["DISTANCE","INTERMEDIATE","NEAR","FULL RANGE"],description:"A full-range-of-focus spiral IOL designed to provide high-quality vision at distance, intermediate and near, with the aim of reducing dependence on glasses for everyday activities. Individual outcomes vary.",near:"clear"}
+monofocal:{name:"Monofocal",focus:["DISTANCE"],description:"One main focal point. This preview is distance-targeted: distance stays sharp, while close menu or phone detail remains noticeably soft.",near:"blur"},
+"rayone-emv":{name:"RayOne EMV",focus:["DISTANCE","INTERMEDIATE"],description:"An enhanced non-diffractive monofocal with an extended range of focus. It improves intermediate detail and gives a smoother transition toward near, but fine print may still be soft.",near:"soft"},
+trifocal:{name:"Trifocal",focus:["DISTANCE","INTERMEDIATE","NEAR"],description:"Provides three focal ranges for distance, intermediate and near. The illustration shows clear near detail with more noticeable point-light halos as a possible trade-off.",near:"clear"},
+"rayone-galaxy":{name:"RayOne Galaxy",focus:["DISTANCE","INTERMEDIATE","NEAR","CONTINUOUS RANGE"],description:"A non-diffractive spiral optic designed for a smooth, continuous range from distance through intermediate to near, with the aim of minimising light phenomena.",near:"clear"}
 };
 const astigmatismKey=key=>key.includes("astigmatism");
 const cataractKey=key=>key.includes("cataracts");
@@ -916,7 +978,14 @@ function draw(target,condition,lens){
     "rayone-galaxy":"RayOne Galaxy is a full-range-of-focus IOL. Its non-diffractive spiral optic is designed to provide high-quality vision at distance, intermediate and near, with the aim of helping people become less dependent on glasses for everyday activities. In this educational preview, its Outdoor and night-scene lights have a softer diffuse glow without the pronounced concentric rings used for the trifocal illustration. It cannot guarantee that every person will be glasses-free; individual outcomes vary."
   };
   $("conditionName"+target).textContent=hasLens?(lensTitles[lens]+" · "+names[condition]):names[condition];
-  $("tip"+target).textContent=(hasLens?lensInfo[lens]:conditionInfo[condition])+(hasAstig?" Astigmatism remains illustrated after these IOL selections because the current lens choices are not labelled as toric. In clinical practice, astigmatism correction may require a toric IOL or another suitable treatment.":"");
+  const conditionLensNote=hasCataract
+    ?" In this cataract scenario, selecting an IOL clears the cloudy natural-lens haze. The lens choice then changes its focus range and illustrative light signature; it does not change the fact that cataract haze has been removed."
+    :hasPresbyopia
+    ?" In this presbyopia scenario, compare the nearby menu area: the distance-targeted monofocal leaves it soft, EMV improves it partway, and the two full-range lenses make it clearer. Trifocal and Galaxy are distinguished by their different light signatures, not by claiming one is universally better."
+    :hasAstig
+    ?" In this astigmatism scenario, the soft displaced shadow remains with these non-toric lens selections. Lens choice changes the focus/light signature, but does not automatically correct corneal astigmatism."
+    :" This scene shows the lens's focus and light signature; it is an educational illustration rather than an individual outcome prediction.";
+  $("tip"+target).textContent=(hasLens?lensInfo[lens]:conditionInfo[condition])+(hasLens?conditionLensNote:"")+(hasAstig?" Astigmatism correction may require a toric IOL or another suitable treatment, depending on the clinical assessment.":"");
 
 }
 function update(){
