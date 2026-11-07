@@ -9,16 +9,19 @@ A responsive static HTML website for exploring illustrative vision conditions an
 - Side-by-side comparison using the same scene and condition.
 - Responsive layout and a step-by-step “How it works” section.
 
-## Cloudflare Pages deployment
-Connect this GitHub repository to Cloudflare Pages with:
-- Production branch: `main`
-- Framework preset: `None` / `Other`
-- Build command: leave blank
-- Build output directory: `.` (repository root, where `index.html` lives)
-- Root directory: leave at the repository root
-- Environment variables: none
+## Cloudflare Workers deployment (existing Worker)
 
-The site is a single `index.html` file with embedded CSS, SVG scenes, and JavaScript. No package install or build command is needed.
+The repository is configured for the existing Cloudflare Worker named `simulator` using `wrangler.jsonc`. The website is served from `public/index.html` as a static asset. No framework or build step is required.
+
+To enable automatic deployments:
+1. In Cloudflare, open **Workers & Pages** and select the existing Worker named `simulator`.
+2. Open **Settings → Builds** and select **Connect**.
+3. Connect GitHub and select `mediqtechsupport-byte/SIMULATOR`.
+4. Select branch `main`.
+5. Leave the build command blank. Use the default deploy command (`npx wrangler deploy`).
+6. Save the configuration. A new push to `main` should trigger a Worker build and deployment.
+
+The Wrangler configuration's `name` must match the existing Worker name `simulator`.
 
 ## Run locally
 Open `index.html` in a modern browser, or run `python -m http.server 8000` from the repository root and open `http://localhost:8000`.
