@@ -918,6 +918,62 @@ body.settings-hidden .controls,body.settings-hidden .lens-profile{display:none!i
   opacity:0!important;background:none!important;filter:none!important;
 }
 
+
+/* FINAL IOL SIGNATURES — make Trifocal and Galaxy visibly distinct.
+   Effects are localized around scene lights; the underlying scene stays sharp.
+   These are teaching illustrations, not measured clinical outcomes. */
+.view.post-iol.scene-night.lens-trifocal:not(.state-astig) .optical-overlay{
+  opacity:1!important;
+  filter:none!important;
+  background:
+    radial-gradient(circle at 38% 37%,rgba(255,250,220,.62) 0 .55%,transparent 1.25%),
+    radial-gradient(circle at 38% 37%,transparent 0 1.35%,rgba(255,235,169,.58) 1.55% 1.82%,transparent 2.05% 2.45%,rgba(255,230,163,.34) 2.65% 2.9%,transparent 3.15% 3.75%,rgba(255,230,163,.20) 3.95% 4.2%,transparent 4.5%),
+    radial-gradient(circle at 63% 37%,rgba(255,250,220,.58) 0 .55%,transparent 1.25%),
+    radial-gradient(circle at 63% 37%,transparent 0 1.35%,rgba(255,235,169,.54) 1.55% 1.82%,transparent 2.05% 2.45%,rgba(255,230,163,.32) 2.65% 2.9%,transparent 3.15% 3.75%,rgba(255,230,163,.18) 3.95% 4.2%,transparent 4.5%),
+    radial-gradient(ellipse 22% 14% at 50% 40%,rgba(255,239,194,.12),transparent 82%)!important;
+  mix-blend-mode:screen!important;
+}
+.view.post-iol.scene-night.lens-rayone-galaxy:not(.state-astig) .optical-overlay{
+  opacity:.82!important;
+  filter:blur(1.2px)!important;
+  background:
+    radial-gradient(ellipse 8% 11% at 38% 37%,rgba(255,245,211,.38),transparent 78%),
+    radial-gradient(ellipse 9% 12% at 63% 37%,rgba(255,245,211,.36),transparent 78%)!important;
+  mix-blend-mode:screen!important;
+}
+.view.post-iol.scene-outdoor.lens-trifocal:not(.state-astig) .optical-overlay{
+  opacity:1!important;
+  filter:none!important;
+  background:
+    radial-gradient(circle at 17% 24%,rgba(255,250,225,.52) 0 .45%,transparent 1.05%),
+    radial-gradient(circle at 17% 24%,transparent 0 1.1%,rgba(255,227,161,.48) 1.3% 1.55%,transparent 1.8% 2.2%,rgba(255,227,161,.28) 2.4% 2.65%,transparent 2.9% 3.4%),
+    radial-gradient(circle at 42% 18%,rgba(245,249,255,.48) 0 .45%,transparent 1.05%),
+    radial-gradient(circle at 42% 18%,transparent 0 1.1%,rgba(204,229,255,.42) 1.3% 1.55%,transparent 1.8% 2.2%,rgba(204,229,255,.24) 2.4% 2.65%,transparent 2.9% 3.4%),
+    radial-gradient(circle at 69% 29%,rgba(255,245,251,.50) 0 .45%,transparent 1.05%),
+    radial-gradient(circle at 69% 29%,transparent 0 1.1%,rgba(255,191,222,.44) 1.3% 1.55%,transparent 1.8% 2.2%,rgba(255,191,222,.25) 2.4% 2.65%,transparent 2.9% 3.4%),
+    radial-gradient(circle at 86% 47%,rgba(255,250,225,.44) 0 .45%,transparent 1.05%),
+    radial-gradient(circle at 86% 47%,transparent 0 1.1%,rgba(255,225,161,.38) 1.3% 1.55%,transparent 1.8% 2.2%,rgba(255,225,161,.22) 2.4% 2.65%,transparent 2.9% 3.4%)!important;
+  mix-blend-mode:screen!important;
+}
+.view.post-iol.scene-outdoor.lens-rayone-galaxy:not(.state-astig) .optical-overlay{
+  opacity:.88!important;
+  filter:blur(1.5px)!important;
+  background:
+    radial-gradient(ellipse 8% 7% at 17% 24%,rgba(255,239,198,.40),transparent 82%),
+    radial-gradient(ellipse 9% 8% at 42% 18%,rgba(222,237,255,.34),transparent 82%),
+    radial-gradient(ellipse 8% 7% at 69% 29%,rgba(255,211,231,.37),transparent 82%),
+    radial-gradient(ellipse 9% 8% at 86% 47%,rgba(255,236,187,.32),transparent 82%)!important;
+  mix-blend-mode:screen!important;
+}
+/* In the Coffeehouse scene both full-range lenses keep near text clear:
+   the meaningful contrast there is focus range, not an artificial blur overlay. */
+.view.post-iol.scene-reading.lens-trifocal .focus-overlay,
+.view.post-iol.scene-reading.lens-rayone-galaxy .focus-overlay{
+  opacity:0!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
 </style>
 </head>
 <body>
@@ -980,8 +1036,8 @@ presbyopia:"Presbyopia is the age-related loss of near focusing ability. In this
 const lensProfiles={
 monofocal:{name:"Monofocal",focus:["DISTANCE"],description:"One main focal point. This preview is distance-targeted: distance stays sharp, while close menu or phone detail remains noticeably soft.",near:"blur"},
 "rayone-emv":{name:"RayOne EMV",focus:["DISTANCE","INTERMEDIATE"],description:"An enhanced non-diffractive monofocal with an extended range of focus. It improves intermediate detail and gives a smoother transition toward near, but fine print may still be soft.",near:"soft"},
-trifocal:{name:"Trifocal",focus:["DISTANCE","INTERMEDIATE","NEAR"],description:"Provides three focal ranges for distance, intermediate and near. The illustration shows clear near detail with more noticeable point-light halos as a possible trade-off.",near:"clear"},
-"rayone-galaxy":{name:"RayOne Galaxy",focus:["DISTANCE","INTERMEDIATE","NEAR","CONTINUOUS RANGE"],description:"A non-diffractive spiral optic designed for a smooth, continuous range from distance through intermediate to near, with the aim of minimising light phenomena.",near:"clear"}
+trifocal:{name:"Trifocal",focus:["DISTANCE","INTERMEDIATE","NEAR"],description:"Uses three distinct focal ranges for distance, intermediate and near. Near detail is clear in this preview; bright point lights show more defined concentric halo rings as an illustrative possible trade-off.",near:"clear"},
+"rayone-galaxy":{name:"RayOne Galaxy",focus:["DISTANCE","INTERMEDIATE","NEAR","CONTINUOUS RANGE"],description:"Uses a non-diffractive spiral optic to extend focus smoothly from distance through intermediate to near. Near detail is clear in this preview, while point lights have a softer, more diffuse glow rather than distinct rings.",near:"clear"}
 };
 const astigmatismKey=key=>key.includes("astigmatism");
 const cataractKey=key=>key.includes("cataracts");
@@ -1049,7 +1105,7 @@ function draw(target,condition,lens){
     monofocal:"A standard monofocal IOL is set for one main focal distance. This demonstration assumes a distance target: road signs and distant cars stay clearer, while nearer dashboard detail is softened.",
     "rayone-emv":"RayOne EMV is an enhanced, non-diffractive monofocal design that extends focus from distance toward intermediate. The demonstration keeps distant details clear and shows more dashboard/intermediate detail than the standard monofocal view. Actual results vary.",
     trifocal:"A trifocal IOL provides separate distance, intermediate and near focal points. In this educational preview, coloured lights in the Outdoor scene and lights at night have more pronounced concentric halo rings. These are illustrative effects, not a prediction of symptoms for an individual.",
-    "rayone-galaxy":"RayOne Galaxy is a full-range-of-focus IOL. Its non-diffractive spiral optic is designed to provide high-quality vision at distance, intermediate and near, with the aim of helping people become less dependent on glasses for everyday activities. In this educational preview, its Outdoor and night-scene lights have a softer diffuse glow without the pronounced concentric rings used for the trifocal illustration. It cannot guarantee that every person will be glasses-free; individual outcomes vary."
+    "rayone-galaxy":"RayOne Galaxy uses a non-diffractive spiral optic designed to provide a smooth, continuous range of focus from distance through intermediate to near. In this educational preview, bright lights have a softer, more diffuse glow without the distinct concentric rings used for the trifocal illustration. This visual contrast is illustrative, not a guarantee of fewer symptoms or glasses independence; individual outcomes vary."
   };
   $("conditionName"+target).textContent=hasLens?(lensTitles[lens]+" · "+names[condition]):names[condition];
   const conditionLensNote=hasCataract
