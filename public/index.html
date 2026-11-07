@@ -881,10 +881,10 @@ outdoor:`<svg viewBox="0 0 1600 850" xmlns="http://www.w3.org/2000/svg" preserve
 const videoClip=(sources,label,rate=1,poster="")=>'<div class="video-poster">'+poster+'</div><video class="scene-video" autoplay muted loop playsinline preload="metadata" data-playback-rate="'+rate+'" aria-label="'+label+'">'+sources.map(([src,type])=>'<source src="'+src+'" type="'+type+'">').join("")+'</video>';
 const sceneClips={
 night:videoClip([
-["https://videos.pexels.com/video-files/40375353/40375353-uhd_3840_2160_30fps.mp4","video/mp4"],
-["https://www.pexels.com/download/video/40375353/","video/mp4"],
-["https://www.pexels.com/download/video/19830542/","video/mp4"]
-],"Nighttime drive through a brightly illuminated city skyline, street lamps, shop lights and traffic",0.9,scenes.night.svg),
+["https://www.pexels.com/download/video/35677223/","video/mp4"],
+["https://www.pexels.com/download/video/36024208/","video/mp4"],
+["https://www.pexels.com/download/video/35075107/","video/mp4"]
+],"Nighttime city highway drive with clearly visible streetlights, illuminated skyline and moving traffic",0.9,scenes.night.svg),
 reading:videoClip([
 ["https://videos.pexels.com/video-files/6828719/6828719-uhd_3840_2160_25fps.mp4","video/mp4"],
 ["https://www.pexels.com/download/video/6828719/","video/mp4"]
