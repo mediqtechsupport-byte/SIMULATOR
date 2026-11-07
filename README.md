@@ -32,7 +32,7 @@ The scene selector uses matching short clips for each environment. Clips are str
 - **Night Driving:** “Cars Passing by at Night” by Maximilian Schönherr, Wikimedia Commons, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). [Source](https://commons.wikimedia.org/wiki/File:Cars_Passing_by_at_Night.webm)
 - **Day Driving:** “ROAD VIEW” by Niyati Sharma 1505, Wikimedia Commons, 9.4 seconds, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). [Source](https://commons.wikimedia.org/wiki/File:ROAD_VIEW.webm)
 - **Reading:** “Person Reading a Book” by Anvar Tushakov, 16-second Pexels clip, used under the [Pexels free-use license](https://www.pexels.com/license/). [Source](https://www.pexels.com/video/person-reading-a-book-4750067/)
-- **Outdoor:** “Mountain Landscape near Nathu La Pass, Sikkim” by Rajani Gairshail, 9.6 seconds, Wikimedia Commons, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). [Source](https://commons.wikimedia.org/wiki/File:Mountain_Landscape_near_Nathu_La_Pass,_Sikkim.webm)
+- **Outdoor:** “Landscape of a Rocky Mountain” by Nico Becker, 6 seconds, 4K 16:9, Pexels free-use license. [Source](https://www.pexels.com/video/landscape-of-a-rocky-mountain-5701093/)
 
 The page displays attribution links for the clips. The Pexels license permits use on websites and apps, does not require attribution, and prohibits redistributing the stock file as a standalone stock asset.
 
