@@ -27,14 +27,14 @@ The Wrangler configuration's `name` must match the existing Worker name `simulat
 
 ## Scene video sources and licenses
 
-The scene selector streams short clips from their original hosts, with a Commons-hosted fallback for the Day Driving and Outdoor scenes.
+The scene selector streams video from Pexels. The same source footage is used in both comparison panels so lens overlays can be compared against the same moving scene.
 
-- **Night Driving:** “Cars Passing by at Night” by Maximilian Schönherr, Wikimedia Commons, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). [Source](https://commons.wikimedia.org/wiki/File:Cars_Passing_by_at_Night.webm)
-- **Day Driving:** “Driving at Daytime” by I Am Sorin, Pexels free-use license. [Source](https://www.pexels.com/video/driving-at-daytime-9109808/). Fallback: “ROAD VIEW” by Niyati Sharma 1505, Wikimedia Commons, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). [Source](https://commons.wikimedia.org/wiki/File:ROAD_VIEW.webm)
-- **Reading:** “Close-Up Video Of Person Reading A Book” by Olia Danilevich, Pexels free-use license. [Source](https://www.pexels.com/video/close-up-video-of-person-reading-a-book-4625318/)
-- **Outdoor:** “Mountain Scenery During Daytime” by Mikhail Nilov, Pexels free-use license. [Source](https://www.pexels.com/video/mountain-scenery-during-daytime-6989136/). Fallback: “Mountain Landscape near Nathu La Pass, Sikkim” by Rajani Gairshail, Wikimedia Commons, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). [Source](https://commons.wikimedia.org/wiki/File:Mountain_Landscape_near_Nathu_La_Pass,_Sikkim.webm)
+- **Night Driving:** “POV night drive in city, vibrant nightlife through car windshield” by Orhan Pergel. [Pexels clip](https://www.pexels.com/video/a-car-driving-through-a-city-at-night-19830439/)
+- **Day Driving:** “Driving at Daytime” by I Am Sorin. [Pexels clip](https://www.pexels.com/video/driving-at-daytime-9109808/). Playback is slowed to 65% for a calmer scene.
+- **Reading:** “Close-Up Video Of Person Reading A Book” by Olia Danilevich. [Pexels clip](https://www.pexels.com/video/close-up-video-of-person-reading-a-book-4625318/)
+- **Outdoor:** “Vibrant Nightlife in Bustling Asian Street Market” by Media Dung. The listed clip is 35 seconds, 4K (3840 × 2160), 16:9 and 25 fps. [Pexels clip](https://www.pexels.com/video/vibrant-nightlife-in-bustling-asian-street-market-29192124/)
 
-The Pexels license permits use on websites and apps, does not require attribution, and prohibits redistributing stock files as standalone stock assets. The page provides creator/source links as a courtesy. The Commons fallback videos are adapted in the visual simulator and remain under CC BY-SA 4.0.
+Pexels states that its photos and videos may be used for free for personal and commercial purposes under the [Pexels license](https://www.pexels.com/license/), subject to its terms and restrictions. Creator credits and source links are shown on the simulator page as a courtesy. The clips are streamed from Pexels rather than redistributed as standalone stock files.
 
 ## How the condition and IOL selectors interact
 
