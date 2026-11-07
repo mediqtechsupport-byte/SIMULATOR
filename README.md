@@ -1,40 +1,43 @@
 # MEDIQ Vision Lab — Interactive Vision Simulator
 
-A responsive, static website inspired by the interaction pattern of a scene-based vision/IOL simulator. It uses original copy, styling, and hand-authored SVG illustrations. It does not use the Galaxy IOL / Rayner logo, brand assets, or proprietary simulator media.
+A responsive static website for exploring illustrative eye-condition and intraocular lens (IOL) scenarios. It uses original styling, copy, and hand-authored SVG scenes. It does not use Galaxy IOL / Rayner branding, logos, or proprietary media.
 
-## Features
+## What it includes
 
 - Four scenes: daytime city, night driving, reading/near task, and distance landscape.
-- Four illustrative viewing conditions: clear baseline, cataract-like haze, astigmatism-like ghosting, and near-vision difficulty.
+- Four illustrative viewing conditions: clear baseline, cataract-like haze, astigmatism-like blur, and near-vision difficulty.
 - Four selectable IOL categories: extended depth of focus, monofocal, multifocal, and toric.
-- Adjustable effect intensity for non-baseline conditions.
-- Side-by-side comparison using the same scene and condition.
-- Responsive layout and keyboard-accessible form controls.
-- Educational disclaimer explaining the limits of the simplified visual effects.
+- Adjustable effect intensity.
+- Side-by-side lens comparison using the same scene and condition.
+- Responsive layout and keyboard-accessible controls.
+
+## Project files
+
+The web app source is stored in `site.tar.gz` at the repository root. It contains `index.html`, `styles.css`, `app.js`, and `.nojekyll`.
 
 ## Run locally
 
-No build step or package installation is required. Open `index.html` in a modern browser, or run a local server:
+Extract the archive into a folder, then open `index.html` in a modern browser. Alternatively, run a local static server from the extracted folder:
 
 ```bash
 python -m http.server 8000
 ```
 
-Then open `http://localhost:8000`.
+Open `http://localhost:8000`.
 
-## Deploy to Vercel
+## Deploy with Cloudflare Pages
 
-This is a static site; no framework, build command, or install command is required.
+Connect this GitHub repository to Cloudflare Pages and use these settings:
 
-1. Import `https://github.com/mediqtechsupport-byte/SIMULATOR` into Vercel.
-2. Set the Root Directory to the repository root (`./`).
-3. Set Framework Preset to Other.
-4. Leave Build Command and Install Command empty.
-5. Set Output Directory to `.` if Vercel asks for one.
-6. Deploy. Future commits to `main` will trigger new deployments when the Git integration is enabled.
+- **Production branch:** `main`
+- **Framework preset:** `None` / `Other`
+- **Build command:** `mkdir -p dist && tar -xzf site.tar.gz -C dist`
+- **Build output directory:** `dist`
+- **Root directory:** `/`
+- **Environment variables:** none required
 
-The included `vercel.json` enables clean URLs and disables trailing slashes. The project is served directly from the repository root.
+The build step extracts the static site into Cloudflare Pages' publish directory. Each push to `main` can then trigger a new deployment.
 
-## Important scope note
+## Educational-use limitation
 
-The vision effects are front-end visual approximations created with CSS filters and SVG artwork. They are not validated optical simulations and must not be used for diagnosis, lens selection, patient-specific counseling, or prediction of surgical outcomes. Replace these simplified effects with clinically validated visual assets/models and obtain appropriate clinical review before using the tool in patient education.
+The visual effects are simplified front-end approximations created with CSS and SVG artwork. They are not clinically validated optical simulations and must not be used for diagnosis, lens selection, patient-specific counseling, or prediction of surgical outcomes. Obtain appropriate clinical review and use validated models and assets before any clinical deployment.
