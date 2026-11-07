@@ -676,16 +676,25 @@ body{padding:0 16px 18px}
   filter:drop-shadow(7px 2px 0 rgba(188,199,218,.38))!important;
 }
 
+
+.utility-bar{display:flex;justify-content:flex-end;gap:10px;padding:10px 14px 0}
+.utility-bar button{border:1px solid #53636e;border-radius:4px;background:#1b2a34;color:#eaf0f4;padding:8px 13px;font-size:12px;font-weight:700;cursor:pointer}
+.utility-bar button:hover{background:#2a3d49}
+.utility-bar button:focus-visible{outline:2px solid #b6d8e7;outline-offset:3px}
+body.settings-hidden .controls,body.settings-hidden .lens-profile{display:none!important}
+@media(max-width:720px){.utility-bar{padding:10px 4px 0}}
+
 </style>
 </head>
 <body>
-<main class="app">
+<main class="app" id="app">
+<div class="utility-bar"><button type="button" id="settingsToggle" aria-expanded="true">Hide Settings</button><button type="button" id="playbackToggle" aria-pressed="false">Pause</button></div>
 <section class="controls" aria-label="Simulator controls">
-  <div class="control"><label for="scene">Scene</label><select id="scene"><option value="night">Night Driving</option><option value="reading">Reading</option><option value="outdoor">Outdoor</option></select></div>
-  <div class="control"><label for="condition">Eye Condition</label><select id="condition"><option value="cataracts">Cataracts</option><option value="cataracts-astigmatism">Cataracts + Astigmatism</option><option value="presbyopia">Presbyopia</option><option value="presbyopia-astigmatism">Presbyopia + Astigmatism</option></select></div>
-  <div class="control"><label for="lensA">Lens (IOL)</label><select id="lensA"><option value="" selected>Select Lens</option><option value="monofocal">Monofocal</option><option value="rayone-emv">RayOne EMV</option><option value="trifocal">Trifocal</option><option value="rayone-galaxy">RayOne Galaxy</option></select></div>
+  <div class="control"><label for="scene">Environment</label><select id="scene"><option value="night">Night Driving</option><option value="reading">Reading</option><option value="outdoor">Outdoor</option></select></div>
+  <div class="control"><label for="condition">Eye Condition</label><select id="condition"><option value="cataracts">Cataracts</option><option value="cataracts-astigmatism">Cataracts + Astigmatism</option><option value="astigmatism">Astigmatism</option><option value="presbyopia">Presbyopia</option><option value="presbyopia-astigmatism">Presbyopia + Astigmatism</option></select></div>
+  <div class="control"><label for="lensA">Choose IOL #1</label><select id="lensA"><option value="" selected>Select Lens</option><option value="monofocal">Monofocal</option><option value="rayone-emv">RayOne EMV</option><option value="trifocal">Trifocal</option><option value="rayone-galaxy">RayOne Galaxy</option></select></div>
   <div class="compare-control"><label class="compare-label" for="compare">Compare</label><label class="switch"><input id="compare" type="checkbox"><span class="switch-track"></span></label></div>
-  <div class="control"><label for="lensB">Comparison Lens (IOL)</label><select id="lensB" disabled><option value="" selected>Select Lens</option><option value="monofocal">Monofocal</option><option value="rayone-emv">RayOne EMV</option><option value="trifocal">Trifocal</option><option value="rayone-galaxy">RayOne Galaxy</option></select></div>
+  <div class="control"><label for="lensB">Choose IOL #2</label><select id="lensB" disabled><option value="" selected>Select Lens</option><option value="monofocal">Monofocal</option><option value="rayone-emv">RayOne EMV</option><option value="trifocal">Trifocal</option><option value="rayone-galaxy">RayOne Galaxy</option></select></div>
 </section>
 <section class="lens-profile" id="lensProfile" aria-live="polite">
   <span class="profile-heading">LENS BEHAVIOUR</span>
@@ -702,6 +711,7 @@ body{padding:0 16px 18px}
 </main>
 <script>
 const $=id=>document.getElementById(id);
+let playbackPaused=false;
 const scenes={
 night:`<svg viewBox="0 0 1600 850" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="nightSky" x2="0" y2="1"><stop stop-color="#1d2941"/><stop offset=".65" stop-color="#65717a"/><stop offset="1" stop-color="#bd9a72"/></linearGradient><linearGradient id="dash" x2="0" y2="1"><stop stop-color="#4c5960"/><stop offset="1" stop-color="#161e25"/></linearGradient><radialGradient id="lamp"><stop stop-color="#fff9d8" stop-opacity=".95"/><stop offset=".18" stop-color="#fff1bd" stop-opacity=".38"/><stop offset="1" stop-color="#ffdca0" stop-opacity="0"/></radialGradient><linearGradient id="road" x2="0" y2="1"><stop stop-color="#626569"/><stop offset="1" stop-color="#242b30"/></linearGradient></defs><rect width="1600" height="850" fill="url(#nightSky)"/><path d="M0 330L1600 300V555H0Z" fill="#253239"/><g fill="#e2c7a4" opacity=".65"><rect x="30" y="235" width="55" height="105"/><rect x="125" y="205" width="32" height="130"/><rect x="1410" y="210" width="70" height="135"/><rect x="1515" y="245" width="45" height="100"/></g><g fill="#f7d69b"><circle cx="58" cy="265" r="5"/><circle cx="145" cy="243" r="4"/><circle cx="1438" cy="253" r="5"/><circle cx="1537" cy="275" r="4"/></g><path d="M530 320Q800 245 1070 320L1370 610H230Z" fill="url(#road)"/><path d="M770 335L755 620h26l35-285" fill="#d7c9a5" opacity=".45"/><path d="M0 0H1600V850H0Z" fill="none" stroke="#111b23" stroke-width="35"/><g><ellipse cx="600" cy="354" rx="95" ry="36" fill="url(#lamp)"/><ellipse cx="1005" cy="350" rx="95" ry="36" fill="url(#lamp)"/><path d="M500 316q100-65 200 0l25 70H480z" fill="#414b51"/><path d="M900 310q110-68 220 0l20 78H880z" fill="#59646a"/><path d="M530 320h150l25 55H510zM930 316h145l30 56H910z" fill="#9eb7c1"/><path d="M515 377l-20 24h230l-22-24M910 375l-20 24h255l-20-24" fill="#dd6254"/><circle cx="535" cy="388" r="8" fill="#fff0bc"/><circle cx="700" cy="388" r="8" fill="#fff0bc"/><circle cx="930" cy="388" r="8" fill="#fff0bc"/><circle cx="1115" cy="388" r="8" fill="#fff0bc"/></g><path d="M0 535Q250 465 470 540L800 670L1130 540Q1390 465 1600 535V850H0Z" fill="url(#dash)"/><path d="M0 410Q180 380 315 520L405 850H0Z" fill="#202b32"/><path d="M1600 390Q1430 380 1300 520L1205 850H1600Z" fill="#202b32"/><path d="M230 850Q340 560 610 525Q800 495 990 525Q1260 560 1370 850" fill="none" stroke="#141c22" stroke-width="95"/><path d="M255 850Q365 575 610 550Q800 525 990 550Q1235 575 1345 850" fill="none" stroke="#6b777c" stroke-width="18"/><rect x="610" y="580" width="380" height="168" rx="25" fill="#18242a" stroke="#65757c" stroke-width="9"/><circle cx="710" cy="658" r="58" fill="#101b22" stroke="#8ea3aa" stroke-width="9"/><circle cx="890" cy="658" r="58" fill="#101b22" stroke="#8ea3aa" stroke-width="9"/><path d="M710 658l0-35M890 658l15-34" stroke="#7bc6d3" stroke-width="7" stroke-linecap="round"/><path d="M0 800Q240 745 430 795M1170 795Q1360 745 1600 800" stroke="#77858b" stroke-width="14" fill="none"/><g fill="#cbd1cb"><path d="M330 695q65-60 120 0l40 90H290zM1165 695q65-60 120 0l40 90h-200z"/></g></svg>`,
 reading:`<svg viewBox="0 0 1600 850" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="room" x2="0" y2="1"><stop stop-color="#d8d0c2"/><stop offset="1" stop-color="#735a43"/></linearGradient><linearGradient id="paper" x2="0" y2="1"><stop stop-color="#fffef3"/><stop offset="1" stop-color="#e8e1ce"/></linearGradient><filter id="bookShadow"><feGaussianBlur stdDeviation="18"/></filter></defs><rect width="1600" height="850" fill="url(#room)"/><rect y="690" width="1600" height="160" fill="#654c38"/><rect x="80" y="65" width="420" height="290" rx="8" fill="#a5bec0"/><path d="M80 310q120-100 220-15t200-10v70H80z" fill="#718d75"/><ellipse cx="820" cy="690" rx="650" ry="95" fill="#211b17" opacity=".35" filter="url(#bookShadow)"/><path d="M155 190Q470 120 790 245L790 760Q465 645 190 735Q155 470 155 190Z" fill="url(#paper)" stroke="#b4aa98" stroke-width="10"/><path d="M800 245Q1125 120 1445 190Q1445 470 1410 735Q1135 645 800 760Z" fill="url(#paper)" stroke="#b4aa98" stroke-width="10"/><path d="M800 245L800 760" stroke="#b5aa96" stroke-width="12"/><g transform="rotate(-2 480 460)" fill="#344452" font-family="Georgia,serif"><text x="245" y="285" font-size="36" font-weight="bold">THE ART OF SEEING</text><text x="245" y="322" font-size="18" fill="#8b765a">CHAPTER 04 · LIGHT AND DETAIL</text><g font-size="23"><text x="245" y="385">Good vision helps us notice the small</text><text x="245" y="420">details that shape everyday moments.</text><text x="245" y="455">Letters, edges and contrast all help</text><text x="245" y="490">the eye bring a page into clear focus.</text><text x="245" y="525">Reading asks the eyes to focus on</text><text x="245" y="560">objects at a comfortable near distance.</text><text x="245" y="595">Light, clarity and focus work together</text><text x="245" y="630">to make printed words easier to see.</text></g><text x="245" y="685" font-size="17" fill="#8b765a">MEDIQ VISION LAB · EDUCATIONAL SAMPLE PAGE</text></g><g transform="rotate(2 1140 460)" fill="#344452" font-family="Georgia,serif"><text x="885" y="285" font-size="31" font-weight="bold">FOCUSING ON THE PAGE</text><text x="885" y="322" font-size="18" fill="#8b765a">READING · NEAR VISION</text><g font-size="22"><text x="885" y="385">The printed line stays in view as</text><text x="885" y="420">your focus moves across the page.</text><text x="885" y="455">Clear detail supports comfortable</text><text x="885" y="490">reading, learning and close work.</text><text x="885" y="525">Different lens designs can provide</text><text x="885" y="560">different ranges of useful focus.</text><text x="885" y="595">This sample text is for demonstration</text><text x="885" y="630">and is not a clinical measurement.</text></g><text x="885" y="685" font-size="17" fill="#8b765a">PAGE 042</text></g></svg>`,
@@ -726,8 +736,9 @@ outdoor:videoClip([
 ],"Crowded Asian night market with colorful neon signs",0.9,scenes.outdoor.svg)
 };
 const sceneMedia=scene=>sceneClips[scene]||scenes[scene];
-const names={cataracts:"Cataracts","cataracts-astigmatism":"Cataracts + Astigmatism",presbyopia:"Presbyopia","presbyopia-astigmatism":"Presbyopia + Astigmatism"};
+const names={cataracts:"Cataracts","cataracts-astigmatism":"Cataracts + Astigmatism",astigmatism:"Astigmatism",presbyopia:"Presbyopia","presbyopia-astigmatism":"Presbyopia + Astigmatism"};
 const conditionInfo={
+astigmatism:"Astigmatism is commonly caused by an irregular curvature of the cornea or natural lens. It can make edges and lights look smeared, shadowed or slightly doubled at different angles. This preview is an educational illustration; the amount and direction of distortion vary from person to person.",
 cataracts:"A cataract clouds the natural lens. Before an IOL is chosen, this view shows overall haze, softened details, lower contrast and extra light scatter (especially noticeable around night lights). Cataract surgery removes the cloudy natural lens; the post-IOL preview therefore clears this haze.",
 "cataracts-astigmatism":"This combines the cloudy, lower-contrast cataract view with astigmatism-like directional ghosting. After cataract removal, the haze is cleared in this preview, but astigmatism can remain unless it is also treated or an appropriate toric IOL is selected.",
 presbyopia:"Presbyopia is the age-related loss of near focusing ability. Before an IOL is selected, the printed words in the Reading scene become soft and blurry. Night Driving and Outdoor remain clear because they represent distant viewing. After an IOL is selected, the Reading scene changes according to that lens's illustrative near-focus range.",
@@ -765,6 +776,7 @@ function draw(target,condition,lens){
       media.addEventListener("canplay",applySpeed,{once:true});
       media.addEventListener("playing",()=>root.classList.add("video-ready"),{once:true});
       applySpeed();
+      if(playbackPaused)media.pause();else media.play().catch(()=>{});
       media.addEventListener("error",()=>{
         root.classList.remove("video-ready");
         root.innerHTML=scenes[scene];
@@ -802,6 +814,20 @@ function update(){
   setProfile("A",lensA);setProfile("B",compare?lensB:null);
   $("profileB").classList.toggle("hidden",!compare||!lensB);
 }
+$("settingsToggle").addEventListener("click",()=>{
+  const hidden=document.body.classList.toggle("settings-hidden");
+  $("settingsToggle").textContent=hidden?"Show Settings":"Hide Settings";
+  $("settingsToggle").setAttribute("aria-expanded",String(!hidden));
+});
+$("playbackToggle").addEventListener("click",()=>{
+  playbackPaused=!playbackPaused;
+  document.querySelectorAll(".scene-video").forEach(video=>{
+    if(playbackPaused)video.pause();
+    else video.play().catch(()=>{});
+  });
+  $("playbackToggle").textContent=playbackPaused?"Play":"Pause";
+  $("playbackToggle").setAttribute("aria-pressed",String(playbackPaused));
+});
 ["scene","condition","lensA","lensB"].forEach(id=>$(id).addEventListener("change",update));
 $("compare").addEventListener("change",update);
 document.querySelectorAll(".info").forEach(button=>button.addEventListener("click",()=>{const tip=$(button.dataset.tip),open=tip.hidden;document.querySelectorAll(".tooltip").forEach(t=>t.hidden=true);document.querySelectorAll(".info").forEach(b=>b.setAttribute("aria-expanded","false"));tip.hidden=!open;button.setAttribute("aria-expanded",String(open))}));
