@@ -282,6 +282,21 @@ body{padding:0 16px 18px}
     linear-gradient(0deg,transparent 67%,rgba(225,241,255,.12) 67.35%,transparent 69%);
 }
 
+
+/* Combined cataract + astigmatism must retain BOTH effects before cataract removal. */
+.view.pre-iol.state-cataracts.state-astig .scene-art{
+  filter:blur(2.8px) sepia(.24) brightness(1.06) contrast(.68) saturate(.72)!important;
+}
+.view.pre-iol.state-cataracts.state-astig .optical-overlay{
+  opacity:1!important;
+  background:
+    radial-gradient(ellipse at 50% 45%,rgba(247,219,166,.13),rgba(224,177,105,.23) 70%),
+    linear-gradient(0deg,transparent 19%,rgba(225,241,255,.10) 19.35%,transparent 20.5%),
+    linear-gradient(0deg,transparent 39%,rgba(255,243,207,.22) 39.35%,transparent 41%),
+    linear-gradient(0deg,transparent 61%,rgba(225,241,255,.12) 61.35%,transparent 62.5%);
+  mix-blend-mode:screen;
+}
+
 </style>
 </head>
 <body>
@@ -393,8 +408,8 @@ function draw(target,condition,lens){
   const lensInfo={
     monofocal:"A standard monofocal IOL is set for one main focal distance. This demonstration assumes a distance target: road signs and distant cars stay clearer, while nearer dashboard detail is softened.",
     "rayone-emv":"RayOne EMV is an enhanced, non-diffractive monofocal design that extends focus from distance toward intermediate. The demonstration keeps distant details clear and shows more dashboard/intermediate detail than the standard monofocal view. Actual results vary.",
-    trifocal:"A trifocal IOL provides separate distance, intermediate and near focal points. In this educational preview, night lights have more pronounced concentric halo rings and the reading scene has a slight text-edge fringe. These are illustrative effects, not a prediction of symptoms for an individual.",
-    "rayone-galaxy":"RayOne Galaxy is a full-range-of-focus IOL. Its non-diffractive spiral optic is designed to provide high-quality vision at distance, intermediate and near, with the aim of helping people become less dependent on glasses for everyday activities. In this educational preview, its near text stays clean and its night-light glow is smoother and less ring-like than the trifocal illustration. It cannot guarantee that every person will be glasses-free; individual outcomes vary."
+    trifocal:"A trifocal IOL provides separate distance, intermediate and near focal points. In this educational preview, coloured lights in the Outdoor scene and lights at night have more pronounced concentric halo rings. These are illustrative effects, not a prediction of symptoms for an individual.",
+    "rayone-galaxy":"RayOne Galaxy is a full-range-of-focus IOL. Its non-diffractive spiral optic is designed to provide high-quality vision at distance, intermediate and near, with the aim of helping people become less dependent on glasses for everyday activities. In this educational preview, its Outdoor and night-scene lights have a softer diffuse glow without the pronounced concentric rings used for the trifocal illustration. It cannot guarantee that every person will be glasses-free; individual outcomes vary."
   };
   $("conditionName"+target).textContent=hasLens?lensTitles[lens]:names[condition];
   $("tip"+target).textContent=hasLens?lensInfo[lens]:conditionInfo[condition];
