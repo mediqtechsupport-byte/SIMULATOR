@@ -435,6 +435,79 @@ body{padding:0 16px 18px}
   mix-blend-mode:multiply;
 }
 
+
+/* ASTIGMATISM SHOULD READ AS A SOFT SHADOW / GHOST IMAGE — never a drawn line.
+   Soft, offset elliptical shadows suggest directional doubling without hard streaks. */
+.view.state-astig .optical-overlay{
+  opacity:.68!important;
+  filter:blur(2.2px);
+  background:
+    radial-gradient(ellipse 12% 5% at 39.5% 38.5%,rgba(221,226,235,.25),transparent 78%),
+    radial-gradient(ellipse 12% 5% at 41% 40%,rgba(255,225,177,.20),transparent 80%),
+    radial-gradient(ellipse 12% 5% at 64.5% 38.5%,rgba(221,226,235,.23),transparent 78%),
+    radial-gradient(ellipse 12% 5% at 66% 40%,rgba(255,225,177,.18),transparent 80%)!important;
+  mix-blend-mode:screen;
+}
+.view.state-astig.scene-reading .optical-overlay{
+  opacity:.62!important;
+  filter:blur(2.8px);
+  background:
+    radial-gradient(ellipse 30% 8% at 48% 48%,rgba(76,91,108,.20),transparent 82%),
+    radial-gradient(ellipse 30% 8% at 51% 51%,rgba(76,91,108,.15),transparent 84%),
+    radial-gradient(ellipse 25% 7% at 52% 69%,rgba(76,91,108,.16),transparent 84%)!important;
+  mix-blend-mode:multiply;
+}
+.view.state-astig.scene-outdoor .optical-overlay{
+  opacity:.66!important;
+  filter:blur(2.5px);
+  background:
+    radial-gradient(ellipse 7% 5% at 17% 24%,rgba(255,231,185,.28),transparent 82%),
+    radial-gradient(ellipse 8% 5% at 19% 26%,rgba(255,231,185,.20),transparent 84%),
+    radial-gradient(ellipse 7% 5% at 42% 18%,rgba(221,232,255,.26),transparent 82%),
+    radial-gradient(ellipse 8% 5% at 44% 20%,rgba(221,232,255,.18),transparent 84%),
+    radial-gradient(ellipse 7% 5% at 69% 29%,rgba(255,215,232,.25),transparent 82%),
+    radial-gradient(ellipse 8% 5% at 71% 31%,rgba(255,215,232,.17),transparent 84%)!important;
+  mix-blend-mode:screen;
+}
+/* Retain the cataract veil while adding soft shadow-like astigmatic doubling. */
+.view.pre-iol.state-cataracts.state-astig .optical-overlay{
+  opacity:.98!important;
+  filter:blur(2.2px);
+  background:
+    radial-gradient(ellipse at 50% 48%,rgba(245,218,174,.20),rgba(219,176,112,.25) 76%),
+    radial-gradient(ellipse 12% 5% at 39.5% 38.5%,rgba(221,226,235,.22),transparent 78%),
+    radial-gradient(ellipse 12% 5% at 41% 40%,rgba(255,225,177,.18),transparent 80%),
+    radial-gradient(ellipse 12% 5% at 64.5% 38.5%,rgba(221,226,235,.20),transparent 78%),
+    radial-gradient(ellipse 12% 5% at 66% 40%,rgba(255,225,177,.16),transparent 80%)!important;
+  mix-blend-mode:screen;
+}
+/* Preserve trifocal halos, but make astigmatism a separate soft offset shadow. */
+.view.state-astig.post-iol.scene-night.lens-trifocal .optical-overlay{
+  opacity:.82!important;filter:blur(1.8px);
+  background:
+    radial-gradient(circle at 38% 37%,rgba(255,247,207,.26) 0 .45%,transparent 1.05%),
+    radial-gradient(circle at 38% 37%,transparent 0 1.1%,rgba(255,235,169,.20) 1.25% 1.42%,transparent 1.58% 2.05%),
+    radial-gradient(ellipse 12% 5% at 40% 39%,rgba(255,224,176,.20),transparent 82%),
+    radial-gradient(circle at 63% 37%,rgba(255,247,207,.24) 0 .45%,transparent 1.05%),
+    radial-gradient(circle at 63% 37%,transparent 0 1.1%,rgba(255,235,169,.18) 1.25% 1.42%,transparent 1.58% 2.05%),
+    radial-gradient(ellipse 12% 5% at 65% 39%,rgba(255,224,176,.18),transparent 82%)!important;
+  mix-blend-mode:screen;
+}
+.view.state-astig.post-iol.scene-outdoor.lens-trifocal .optical-overlay{
+  opacity:.78!important;filter:blur(1.8px);
+  background:
+    radial-gradient(circle at 17% 24%,rgba(255,247,219,.22) 0 .35%,transparent .95%),
+    radial-gradient(circle at 17% 24%,transparent 0 1%,rgba(255,227,161,.17) 1.15% 1.32%,transparent 1.48% 1.9%),
+    radial-gradient(ellipse 7% 5% at 19% 26%,rgba(255,231,185,.22),transparent 82%),
+    radial-gradient(circle at 42% 18%,rgba(239,247,255,.20) 0 .35%,transparent .95%),
+    radial-gradient(circle at 42% 18%,transparent 0 1%,rgba(204,229,255,.15) 1.15% 1.32%,transparent 1.48% 1.9%),
+    radial-gradient(ellipse 8% 5% at 44% 20%,rgba(221,232,255,.20),transparent 82%),
+    radial-gradient(circle at 69% 29%,rgba(255,239,249,.21) 0 .35%,transparent .95%),
+    radial-gradient(circle at 69% 29%,transparent 0 1%,rgba(255,191,222,.15) 1.15% 1.32%,transparent 1.48% 1.9%),
+    radial-gradient(ellipse 7% 5% at 71% 31%,rgba(255,215,232,.19),transparent 82%)!important;
+  mix-blend-mode:screen;
+}
+
 </style>
 </head>
 <body>
