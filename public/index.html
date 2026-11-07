@@ -100,16 +100,16 @@ outdoor:`<svg viewBox="0 0 1600 850" xmlns="http://www.w3.org/2000/svg" preserve
 };
 const names={cataracts:"Cataracts","cataracts-astigmatism":"Cataracts + Astigmatism",presbyopia:"Presbyopia","presbyopia-astigmatism":"Presbyopia + Astigmatism"};
 const conditionInfo={
-cataracts:"Cataracts cloud the natural lens. Before an IOL is chosen, this view shows haze, softer detail, reduced contrast and extra light scatter. Cataract surgery removes the cloudy natural lens; the post-IOL preview therefore clears this haze.",
-"cataracts-astigmatism":"This combines cataract-like haze with astigmatic blur. After cataract removal, the haze is cleared in this preview, but astigmatism can remain unless it is also treated or an appropriate toric IOL is selected.",
-presbyopia:"Presbyopia reduces the eye's ability to focus up close. This preset mainly affects the Reading scene; distance scenes stay comparatively clear. The selected IOL profile changes how near focus is illustrated.",
-"presbyopia-astigmatism":"This combines near-focus difficulty with astigmatic distortion. The reading scene shows near blur; astigmatic ghosting can affect both near and far scenes. Astigmatism correction depends on the treatment plan and any toric lens used."
+cataracts:"A cataract clouds the natural lens. Before an IOL is chosen, this view shows overall haze, softened details, lower contrast and extra light scatter (especially noticeable around night lights). Cataract surgery removes the cloudy natural lens; the post-IOL preview therefore clears this haze.",
+"cataracts-astigmatism":"This combines the cloudy, lower-contrast cataract view with astigmatism-like directional ghosting. After cataract removal, the haze is cleared in this preview, but astigmatism can remain unless it is also treated or an appropriate toric IOL is selected.",
+presbyopia:"Presbyopia is the age-related loss of near focusing ability. This preset blurs close objects in the Reading scene while leaving distance scenes comparatively clear. The selected IOL profile changes how near focus is illustrated.",
+"presbyopia-astigmatism":"This combines near-focus difficulty with astigmatic distortion. The reading scene shows near blur, while ghosting can affect both near and far scenes. Astigmatism correction depends on the treatment plan and any toric lens used."
 };
 const lensProfiles={
 monofocal:{name:"Monofocal",focus:["DISTANCE"],description:"One focal distance. This demo assumes a distance-targeted lens, so reading may remain soft; near glasses are commonly needed.",near:"blur"},
-"rayone-emv":{name:"RayOne EMV",focus:["DISTANCE","INTERMEDIATE"],description:"Enhanced, non-diffractive monofocal design that extends focus from distance toward intermediate. Near reading may still need extra correction.",near:"soft"},
-trifocal:{name:"Trifocal",focus:["DISTANCE","INTERMEDIATE","NEAR"],description:"Three focal points share incoming light. The night preview adds a subtle possible halo effect; real visual symptoms vary.",near:"clear"},
-"rayone-galaxy":{name:"RayOne Galaxy",focus:["DISTANCE","INTERMEDIATE","NEAR","CONTINUOUS"],description:"Non-diffractive spiral optic designed for a smooth, continuous full range of focus. The night preview uses a softer halo illustration.",near:"clear"}
+"rayone-emv":{name:"RayOne EMV",focus:["DISTANCE","INTERMEDIATE"],description:"Enhanced, non-diffractive monofocal design that extends focus from distance toward intermediate (Rayner reports up to 1.5 D). Near reading may still need extra correction.",near:"soft"},
+trifocal:{name:"Trifocal",focus:["DISTANCE","INTERMEDIATE","NEAR"],description:"A diffractive design distributes light across distance, intermediate and near focal points. The night preview illustrates possible halos or glare; real symptoms vary.",near:"clear"},
+"rayone-galaxy":{name:"RayOne Galaxy",focus:["DISTANCE","INTERMEDIATE","NEAR","CONTINUOUS"],description:"A non-diffractive spiral optic designed for a smooth, continuous full range of focus. Rayner describes minimized visual disturbances; the night preview still allows a small illustrative glow.",near:"clear"}
 };
 const astigmatismKey=key=>key.includes("astigmatism");
 const cataractKey=key=>key.includes("cataracts");
