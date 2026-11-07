@@ -624,6 +624,58 @@ body{padding:0 16px 18px}
 .view.state-presbyopia-astig.scene-reading .focus-overlay{z-index:1}
 .view.state-presbyopia-astig.scene-reading .optical-overlay{z-index:2}
 
+
+/* ASTIGMATISM VISIBILITY FIX — visible offset shadow, not thin lines.
+   Apply a restrained displaced duplicate shadow to the scene itself, plus a
+   stronger soft shadow around scene lights / reading details. */
+.view.state-astig .scene-art{
+  filter:drop-shadow(7px 2px 0 rgba(188,199,218,.38))!important;
+}
+.view.state-astig .optical-overlay{
+  opacity:1!important;
+  filter:blur(3px)!important;
+  background:
+    radial-gradient(ellipse 18% 9% at 39% 39%,rgba(226,218,201,.36),transparent 82%),
+    radial-gradient(ellipse 18% 9% at 42% 42%,rgba(146,162,186,.30),transparent 84%),
+    radial-gradient(ellipse 18% 9% at 64% 39%,rgba(226,218,201,.32),transparent 82%),
+    radial-gradient(ellipse 18% 9% at 67% 42%,rgba(146,162,186,.26),transparent 84%)!important;
+  mix-blend-mode:screen!important;
+}
+.view.state-astig.scene-reading .scene-art{
+  filter:drop-shadow(5px 2px 0 rgba(83,94,111,.42))!important;
+}
+.view.state-astig.scene-reading .optical-overlay{
+  opacity:.96!important;filter:blur(3.2px)!important;
+  background:
+    radial-gradient(ellipse 32% 10% at 43% 48%,rgba(62,75,92,.30),transparent 85%),
+    radial-gradient(ellipse 32% 10% at 57% 53%,rgba(62,75,92,.24),transparent 85%),
+    radial-gradient(ellipse 28% 9% at 52% 70%,rgba(62,75,92,.22),transparent 86%)!important;
+  mix-blend-mode:multiply!important;
+}
+.view.state-astig.scene-outdoor .scene-art,
+.view.state-astig.scene-night .scene-art{
+  filter:drop-shadow(8px 2px 0 rgba(188,199,218,.42))!important;
+}
+.view.state-astig.scene-outdoor .optical-overlay,
+.view.state-astig.scene-night .optical-overlay{
+  opacity:1!important;filter:blur(3px)!important;
+  background:
+    radial-gradient(ellipse 8% 6% at 17% 24%,rgba(255,231,185,.42),transparent 84%),
+    radial-gradient(ellipse 10% 7% at 20% 27%,rgba(255,231,185,.32),transparent 86%),
+    radial-gradient(ellipse 8% 6% at 42% 18%,rgba(221,232,255,.40),transparent 84%),
+    radial-gradient(ellipse 10% 7% at 45% 21%,rgba(221,232,255,.30),transparent 86%),
+    radial-gradient(ellipse 8% 6% at 69% 29%,rgba(255,215,232,.38),transparent 84%),
+    radial-gradient(ellipse 10% 7% at 72% 32%,rgba(255,215,232,.28),transparent 86%)!important;
+  mix-blend-mode:screen!important;
+}
+/* Combined cataract + astigmatism keeps cataract haze and adds the offset shadow. */
+.view.pre-iol.state-cataracts.state-astig .scene-art{
+  filter:blur(2px) sepia(.12) contrast(.78) drop-shadow(7px 2px 0 rgba(188,199,218,.35))!important;
+}
+.view.post-iol.state-cataracts.state-astig .scene-art{
+  filter:drop-shadow(7px 2px 0 rgba(188,199,218,.38))!important;
+}
+
 </style>
 </head>
 <body>
