@@ -27,14 +27,14 @@ The Wrangler configuration's `name` must match the existing Worker name `simulat
 
 ## Scene video sources and licenses
 
-The scene selector uses matching short clips for each environment. Clips are streamed from their original hosts, not copied into this repository.
+The scene selector streams short clips from their original hosts, with a Commons-hosted fallback for the Day Driving and Outdoor scenes.
 
 - **Night Driving:** “Cars Passing by at Night” by Maximilian Schönherr, Wikimedia Commons, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). [Source](https://commons.wikimedia.org/wiki/File:Cars_Passing_by_at_Night.webm)
-- **Day Driving:** “ROAD VIEW” by Niyati Sharma 1505, Wikimedia Commons, 9.4 seconds, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). [Source](https://commons.wikimedia.org/wiki/File:ROAD_VIEW.webm)
-- **Reading:** “Person Reading a Book” by Anvar Tushakov, 16-second Pexels clip, used under the [Pexels free-use license](https://www.pexels.com/license/). [Source](https://www.pexels.com/video/person-reading-a-book-4750067/)
-- **Outdoor:** “Landscape of a Rocky Mountain” by Nico Becker, 6 seconds, 4K 16:9, Pexels free-use license. [Source](https://www.pexels.com/video/landscape-of-a-rocky-mountain-5701093/)
+- **Day Driving:** “Driving at Daytime” by I Am Sorin, Pexels free-use license. [Source](https://www.pexels.com/video/driving-at-daytime-9109808/). Fallback: “ROAD VIEW” by Niyati Sharma 1505, Wikimedia Commons, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). [Source](https://commons.wikimedia.org/wiki/File:ROAD_VIEW.webm)
+- **Reading:** “Close-Up Video Of Person Reading A Book” by Olia Danilevich, Pexels free-use license. [Source](https://www.pexels.com/video/close-up-video-of-person-reading-a-book-4625318/)
+- **Outdoor:** “Mountain Scenery During Daytime” by Mikhail Nilov, Pexels free-use license. [Source](https://www.pexels.com/video/mountain-scenery-during-daytime-6989136/). Fallback: “Mountain Landscape near Nathu La Pass, Sikkim” by Rajani Gairshail, Wikimedia Commons, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). [Source](https://commons.wikimedia.org/wiki/File:Mountain_Landscape_near_Nathu_La_Pass,_Sikkim.webm)
 
-The page displays attribution links for the clips. The Pexels license permits use on websites and apps, does not require attribution, and prohibits redistributing the stock file as a standalone stock asset.
+The Pexels license permits use on websites and apps, does not require attribution, and prohibits redistributing stock files as standalone stock assets. The page provides creator/source links as a courtesy. The Commons fallback videos are adapted in the visual simulator and remain under CC BY-SA 4.0.
 
 ## How the condition and IOL selectors interact
 
