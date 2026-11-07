@@ -297,6 +297,133 @@ body{padding:0 16px 18px}
   mix-blend-mode:screen;
 }
 
+
+/* CONDITION × SCENE × IOL MATRIX — consistent educational previews.
+   Cataract haze clears after surgery; astigmatic distortion remains unless corrected.
+   Presbyopia affects near tasks, so its blur is limited to the Reading scene. */
+.view.pre-iol.state-cataracts .scene-art{
+  filter:blur(3.2px) sepia(.18) brightness(1.04) contrast(.68) saturate(.72)!important;
+}
+.view.pre-iol.state-cataracts .optical-overlay{
+  opacity:.9!important;
+  background:radial-gradient(ellipse at 50% 48%,rgba(245,218,174,.20),rgba(219,176,112,.25) 76%),linear-gradient(110deg,rgba(255,238,204,.10),rgba(255,244,220,.20),rgba(255,238,204,.10))!important;
+  mix-blend-mode:screen;
+}
+.view.post-iol.state-cataracts:not(.state-astig) .scene-art{filter:none!important}
+.view.post-iol.state-cataracts:not(.state-astig) .optical-overlay{opacity:0!important}
+
+/* Astigmatism remains recognizable in every scene and after lens selection.
+   Directional smearing is deliberately subtle and is not a toric-IOL simulation. */
+.view.state-astig .scene-art{
+  filter:blur(.65px) contrast(1.04) saturate(1.03)!important;
+}
+.view.state-astig .optical-overlay{
+  opacity:.76!important;
+  background:
+    linear-gradient(0deg,transparent 27%,rgba(230,242,255,.13) 28%,transparent 30%),
+    linear-gradient(0deg,transparent 49%,rgba(255,238,197,.22) 50%,rgba(255,238,197,.22) 50.7%,transparent 53%),
+    linear-gradient(0deg,transparent 71%,rgba(230,242,255,.13) 72%,transparent 74%),
+    linear-gradient(90deg,transparent 12%,rgba(255,238,197,.06) 46%,transparent 78%)!important;
+  mix-blend-mode:screen;
+}
+.view.pre-iol.state-cataracts.state-astig .scene-art{
+  filter:blur(3.2px) sepia(.18) brightness(1.04) contrast(.68) saturate(.72)!important;
+}
+.view.pre-iol.state-cataracts.state-astig .optical-overlay{
+  opacity:.98!important;
+  background:
+    radial-gradient(ellipse at 50% 48%,rgba(245,218,174,.20),rgba(219,176,112,.25) 76%),
+    linear-gradient(0deg,transparent 27%,rgba(230,242,255,.13) 28%,transparent 30%),
+    linear-gradient(0deg,transparent 49%,rgba(255,238,197,.24) 50%,rgba(255,238,197,.24) 50.7%,transparent 53%),
+    linear-gradient(0deg,transparent 71%,rgba(230,242,255,.13) 72%,transparent 74%)!important;
+  mix-blend-mode:screen;
+}
+
+/* Near-focus behavior: presbyopia is apparent on printed text, not distant scenery. */
+.view.state-presbyopia.scene-night .scene-art,
+.view.state-presbyopia.scene-outdoor .scene-art{filter:none!important}
+.view.pre-iol.state-presbyopia.scene-reading .focus-overlay,
+.view.pre-iol.state-presbyopia-astig.scene-reading .focus-overlay{
+  inset:43% 0 0!important;opacity:1!important;
+  backdrop-filter:blur(7px) saturate(.72)!important;
+  -webkit-backdrop-filter:blur(7px) saturate(.72)!important;
+  background:rgba(238,231,213,.14)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-monofocal .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-monofocal .focus-overlay{
+  inset:43% 0 0!important;opacity:1!important;
+  backdrop-filter:blur(7px) saturate(.72)!important;
+  -webkit-backdrop-filter:blur(7px) saturate(.72)!important;
+  background:rgba(238,231,213,.14)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-rayone-emv .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-rayone-emv .focus-overlay{
+  inset:43% 0 0!important;opacity:1!important;
+  backdrop-filter:blur(3.5px) saturate(.88)!important;
+  -webkit-backdrop-filter:blur(3.5px) saturate(.88)!important;
+  background:rgba(238,231,213,.07)!important;
+}
+.view.post-iol.state-presbyopia.scene-reading.lens-trifocal .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-trifocal .focus-overlay,
+.view.post-iol.state-presbyopia.scene-reading.lens-rayone-galaxy .focus-overlay,
+.view.post-iol.state-presbyopia-astig.scene-reading.lens-rayone-galaxy .focus-overlay{
+  opacity:0!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+
+/* Lens signatures are small and attached to actual scene lights, never screen-wide. */
+.view.post-iol.scene-night.lens-trifocal .optical-overlay{
+  opacity:.86!important;
+  background:
+    radial-gradient(circle at 38% 37%,rgba(255,247,207,.30) 0 .45%,transparent 1.05%),
+    radial-gradient(circle at 38% 37%,transparent 0 1.1%,rgba(255,235,169,.24) 1.25% 1.42%,transparent 1.58% 2.05%,rgba(255,235,169,.12) 2.2% 2.34%,transparent 2.5%),
+    radial-gradient(circle at 63% 37%,rgba(255,247,207,.28) 0 .45%,transparent 1.05%),
+    radial-gradient(circle at 63% 37%,transparent 0 1.1%,rgba(255,235,169,.22) 1.25% 1.42%,transparent 1.58% 2.05%,rgba(255,235,169,.11) 2.2% 2.34%,transparent 2.5%)!important;
+  mix-blend-mode:screen;
+}
+.view.post-iol.scene-night.lens-rayone-emv .optical-overlay{
+  opacity:.22!important;
+  background:radial-gradient(ellipse 5% 8% at 38% 37%,rgba(255,244,205,.24),transparent 78%),radial-gradient(ellipse 5% 8% at 63% 37%,rgba(255,244,205,.22),transparent 78%)!important;
+}
+.view.post-iol.scene-night.lens-rayone-galaxy .optical-overlay{
+  opacity:.34!important;
+  background:radial-gradient(ellipse 7% 10% at 38% 37%,rgba(255,245,205,.30),transparent 78%),radial-gradient(ellipse 8% 11% at 63% 37%,rgba(255,245,205,.28),transparent 78%)!important;
+}
+.view.post-iol.scene-outdoor.lens-trifocal:not(.state-astig) .optical-overlay{
+  opacity:.78!important;
+  background:
+    radial-gradient(circle at 17% 24%,rgba(255,247,219,.26) 0 .35%,transparent .95%),
+    radial-gradient(circle at 17% 24%,transparent 0 1%,rgba(255,227,161,.20) 1.15% 1.32%,transparent 1.48% 1.9%,rgba(255,227,161,.10) 2.05% 2.2%,transparent 2.35%),
+    radial-gradient(circle at 42% 18%,rgba(239,247,255,.24) 0 .35%,transparent .95%),
+    radial-gradient(circle at 42% 18%,transparent 0 1%,rgba(204,229,255,.18) 1.15% 1.32%,transparent 1.48% 1.9%,rgba(204,229,255,.09) 2.05% 2.2%,transparent 2.35%),
+    radial-gradient(circle at 69% 29%,rgba(255,239,249,.25) 0 .35%,transparent .95%),
+    radial-gradient(circle at 69% 29%,transparent 0 1%,rgba(255,191,222,.18) 1.15% 1.32%,transparent 1.48% 1.9%,rgba(255,191,222,.09) 2.05% 2.2%,transparent 2.35%)!important;
+  mix-blend-mode:screen;
+}
+.view.post-iol.scene-outdoor.lens-rayone-emv .optical-overlay{
+  opacity:.20!important;
+  background:radial-gradient(ellipse 7% 6% at 17% 24%,rgba(255,239,198,.24),transparent 82%),radial-gradient(ellipse 8% 6% at 69% 29%,rgba(255,213,231,.18),transparent 82%)!important;
+}
+.view.post-iol.scene-outdoor.lens-rayone-galaxy .optical-overlay{
+  opacity:.38!important;
+  background:radial-gradient(ellipse 9% 8% at 17% 24%,rgba(255,239,198,.30),transparent 82%),radial-gradient(ellipse 10% 8% at 42% 18%,rgba(222,237,255,.25),transparent 82%),radial-gradient(ellipse 9% 8% at 69% 29%,rgba(255,211,231,.27),transparent 82%)!important;
+}
+.view.post-iol.scene-reading .optical-overlay{opacity:0!important}
+
+/* When astigmatism is selected, preserve its directional streaks alongside lens halos. */
+.view.state-astig.post-iol.scene-night.lens-trifocal .optical-overlay{
+  background:
+    linear-gradient(0deg,transparent 49%,rgba(255,238,197,.18) 50%,transparent 53%),
+    radial-gradient(circle at 38% 37%,transparent 0 1.1%,rgba(255,235,169,.20) 1.25% 1.42%,transparent 1.58% 2.05%),
+    radial-gradient(circle at 63% 37%,transparent 0 1.1%,rgba(255,235,169,.18) 1.25% 1.42%,transparent 1.58% 2.05%)!important;
+}
+.view.state-astig.post-iol.scene-outdoor.lens-trifocal .optical-overlay{
+  background:
+    linear-gradient(0deg,transparent 49%,rgba(255,238,197,.18) 50%,transparent 53%),
+    radial-gradient(circle at 17% 24%,transparent 0 1%,rgba(255,227,161,.18) 1.15% 1.32%,transparent 1.48% 1.9%),
+    radial-gradient(circle at 42% 18%,transparent 0 1%,rgba(204,229,255,.16) 1.15% 1.32%,transparent 1.48% 1.9%),
+    radial-gradient(circle at 69% 29%,transparent 0 1%,rgba(255,191,222,.16) 1.15% 1.32%,transparent 1.48% 1.9%)!important;
+}
+
 </style>
 </head>
 <body>
